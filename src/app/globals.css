@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --primary-accent: #c02b2b;
+  --secondary-accent: #2c5f4b;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-accent: var(--primary-accent);
+  --color-secondary-accent: var(--secondary-accent);
+  
+  --font-sans: var(--font-inter), "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "Courier New", monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Brutalist / Academic Spacing & Border Details */
+.border-brutal {
+  border: 1px solid #1a1a1a;
+}
+
+.border-brutal-muted {
+  border: 1px solid rgba(26, 26, 26, 0.15);
+}
+
+.shadow-brutal {
+  box-shadow: 3px 3px 0px 0px #1a1a1a;
+}
+
+.shadow-brutal-red {
+  box-shadow: 3px 3px 0px 0px #c02b2b;
+}
+
+.shadow-brutal-green {
+  box-shadow: 3px 3px 0px 0px #2c5f4b;
+}
+
+.btn-brutal-primary {
+  background-color: var(--primary-accent);
+  color: #fafafa;
+  border: 1px solid #1a1a1a;
+  box-shadow: 2px 2px 0px 0px #1a1a1a;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-brutal-primary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px 0px #1a1a1a;
+}
+
+.btn-brutal-primary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px 0px #1a1a1a;
+}
+
+.btn-brutal-secondary {
+  background-color: #fafafa;
+  color: #1a1a1a;
+  border: 1px solid #1a1a1a;
+  box-shadow: 2px 2px 0px 0px #1a1a1a;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-brutal-secondary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px 0px #1a1a1a;
+}
+
+.btn-brutal-secondary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px 0px #1a1a1a;
+}
+
+.link-brutal {
+  position: relative;
+  text-decoration: none;
+  font-family: var(--font-mono);
+}
+
+.link-brutal::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-accent);
+  transform-origin: bottom right;
+  transition: transform 0.15s ease-out;
+}
+
+.link-brutal:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.link-brutal:hover {
+  color: var(--primary-accent);
+}
