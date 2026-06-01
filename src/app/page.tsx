@@ -46,21 +46,21 @@ export default async function Home() {
         
         <div className="flex-1 space-y-4 pl-2">
           <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ RESEARCH & ENGINEERING PROFILE ]
+            [ SOFTWARE ENGINEERING PORTFOLIO ]
           </span>
           <h1 className="text-3xl sm:text-4xl font-bold font-mono tracking-tight leading-tight">
             Cristhian Victor Rojas Marquez
           </h1>
           <p className="font-mono text-sm text-[#1a1a1a]/60">
-            Software Engineering & Computer Science
+            Software Engineering & Web Development
           </p>
           
           <div className="prose prose-zinc max-w-none text-[#1a1a1a] font-sans leading-relaxed text-sm sm:text-base space-y-4">
             <p>
-              Welcome to my academic and professional space. I am a software engineer and computer science researcher focused on building reliable software systems and exploring the intersection of computing and neural systems.
+              Welcome to my professional development space. I am a software engineer focused on building robust web systems, test automation engines, and reliable real-time signal classification applications.
             </p>
             <p>
-              My primary research and development areas include <strong>Software Analysis/Testing</strong>, <strong>Neurotechnology & Brain-Computer Interfaces (BCI)</strong>, and <strong>Modern Web Development</strong>.
+              My primary expertise and development areas include <strong>Software Analysis & Testing</strong>, <strong>Neurotechnology Applications (BCI Pipelines)</strong>, and <strong>Modern Web Development</strong>.
             </p>
           </div>
 
@@ -90,7 +90,7 @@ export default async function Home() {
             <span className="text-[#2c5f4b]">■</span> SKILLS_INVENTORY.log
           </h2>
           <p className="text-xs font-mono text-[#1a1a1a]/60 mb-4">
-            Core technologies, programming languages, and experimental research toolkits:
+            Core technologies, programming languages, and software frameworks:
           </p>
           <div className="flex flex-wrap gap-2">
             {skills.map((skill) => (
@@ -108,7 +108,7 @@ export default async function Home() {
         <section className="md:col-span-5 border-brutal bg-[#fafafa] p-6 shadow-brutal flex flex-col justify-between">
           <div className="space-y-4">
             <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 flex items-center gap-2">
-              <span className="text-[#c02b2b]">■</span> NEUROTECH_RESEARCH
+              <span className="text-[#c02b2b]">■</span> NEUROTECH_SYSTEMS
             </h2>
             <div className="border border-[#1a1a1a]/10 bg-white p-2">
               <Image
@@ -121,7 +121,7 @@ export default async function Home() {
               />
             </div>
             <p className="text-xs font-mono text-[#1a1a1a]/70 leading-relaxed">
-              Active exploration of electroencephalography (EEG) signal processing, BCI pipelines using python frameworks (MNE-Python, PyTorch), and developing responsive dashboards for neurophysiological experiment visualization.
+              Development of real-time electroencephalography (EEG) data processing pipelines (MNE-Python, PyTorch) and building responsive web dashboards for live neurofeedback visualization.
             </p>
           </div>
         </section>

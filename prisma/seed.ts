@@ -17,86 +17,77 @@ async function main() {
   // Seed Projects
   const projects = [
     {
-      title: "Real-Time EEG BCI Signal Pipeline",
+      title: "Real-Time EEG BCI Data Stream Pipeline",
       description:
-        "A Python-based real-time EEG signal processing pipeline using MNE-Python and PyTorch to classify motor imagery tasks. Includes WebSockets server for streaming classified states to web-based dashboards for neuro-rehabilitation.",
-      content: `# Real-Time EEG BCI Signal Pipeline
+        "A high-throughput, low-latency Python and React data pipeline streaming real-time EEG signals. Integrates PyTorch for inference and utilizes WebSockets for sub-150ms client visualization.",
+      content: `# Real-Time EEG BCI Data Stream Pipeline
 
-This project develops an end-to-end framework for processing raw electroencephalography (EEG) signals and classifying motor imagery commands (e.g., imagining hand movements) to drive external hardware or virtual environments.
+An end-to-end software architecture engineered to ingest, preprocess, and classify high-frequency electroencephalography (EEG) data streams, enabling real-time device control and low-latency visualization.
 
 ## System Architecture
 
-The pipeline consists of three core components:
-1. **Acquisition & Preprocessing**: Streams data from EEG amplifiers using LSL (Lab Streaming Layer) and applies spatial filters (e.g., Common Spatial Patterns - CSP) and bandpass filters.
-2. **Deep Learning Classification**: A convolutional neural network (EEGNet variant) built on PyTorch that extracts temporal and spatial features.
-3. **WebSockets Gateway**: Streams predicted class probabilities to interactive React dashboards in real-time.
+The pipeline is split into three decoupled components to maintain high throughput:
+1. **Ingestion & Buffering**: Ingests raw multi-channel signals at 250Hz using LSL (Lab Streaming Layer) protocol, applying spatial filters and downsampling in parallel worker processes.
+2. **Deep Learning Inference**: A PyTorch microservice executing inference using an EEGNet convolutional neural network to classify imagined hand movements.
+3. **WebSockets Gateway**: A Node.js socket server that broadcasts classification probabilities to front-end dashboards at sub-150ms latencies.
 
-## Key Research Outcomes
+## Engineering Challenges
 
-- Achieved an average classification accuracy of **84.5%** on the BCI Competition IV 2a dataset.
-- Optimized latency down to **120ms** end-to-end (acquisition to web render).
+- **Buffer Overflows**: Handled high-frequency packet spikes by implementing a ring buffer in Python to prevent memory leaks.
+- **Latency Budget**: Optimized thread execution and IPC serialization, reducing acquisition-to-render latency to **120ms**.
 
-![EEG Analysis Graph](/bci_abstract.png)
+![BCI Data Pipeline Architecture](/bci_abstract.png)
 `,
-      techStack: "Python, MNE-Python, PyTorch, WebSockets, NumPy",
+      techStack: "Python, WebSockets, PyTorch, Node.js, React, NumPy",
       repoUrl: "https://github.com/cristhian-rojas/bci-eeg-pipeline",
       liveUrl: "https://bci-eeg-demo.example.com",
     },
     {
-      title: "Automated Mutation Testing Framework for TypeScript",
+      title: "TypeScript AST Mutation Testing Engine",
       description:
-        "A research project developing an automated mutation testing framework for TypeScript applications. Designed to evaluate test suite robustness by injecting artificial faults (mutants) and verifying detection rates on AST structures.",
-      content: `# TS Mutation Testing Engine
+        "A developer tool that parses TypeScript source code into Abstract Syntax Trees, automatically injects logic mutants, and runs parallel Jest test suites to evaluate test coverage efficacy.",
+      content: `# TypeScript AST Mutation Testing Engine
 
-A specialized mutation analysis tool for TypeScript programs, leveraging compiler AST (Abstract Syntax Tree) APIs to automatically evaluate test coverage strength.
+A CLI developer tool designed to verify the actual coverage strength of unit test suites by dynamically injecting logical bugs ("mutants") and checking if the test cases catch them.
 
-## Background
+## Tool Architecture
 
-Traditional line or branch coverage metrics do not guarantee that your tests actually verify correctness. Mutation testing addresses this by modifying source code in subtle ways (e.g., changing \`>\` to \`<\`) to see if existing test suites fail ("kill the mutant").
+Unlike basic line-coverage utilities, this engine measures assertion strength:
+- **AST Manipulation**: Uses \`ts-morph\` to parse TypeScript source files, traversing nodes to locate relational, arithmetic, and logical operators.
+- **Parallel Test Runner**: Spawns a pool of Node.js child processes to execute Jest suites concurrently, preventing CPU bottlenecks.
+- **Diff Reporter**: Generates terminal and HTML diff reports displaying surviving mutants and mutation scores.
 
-## Core Features
+## Code In-depth
 
-- **AST Mutation Engine**: Mutates arithmetic, relational, and logical nodes using \`ts-morph\`.
-- **Parallel Runner**: Executes Jest test cases in parallel web worker threads, speeding up analysis.
-- **Coverage Reports**: Generates interactive HTML dashboards highlighting "surviving" mutants.
-
-## Code Sample
-
-Here is a snippet showing how we detect target binary expressions:
+The core engine matches binary expressions and swaps logic operators:
 
 \`\`\`typescript
-// Mutates binary operators in TS Abstract Syntax Trees
+// Traverses the AST to locate logical nodes
 if (node.getKind() === SyntaxKind.BinaryExpression) {
   const operator = node.getOperatorToken();
   if (operator.getText() === "===") {
-    // Replace with !== mutant
+    // Replace node operator text with !== to create mutant
   }
 }
 \`\`\`
 `,
-      techStack: "TypeScript, AST, Node.js, Jest, TS-Morph",
+      techStack: "TypeScript, AST Parsing, Node.js, Jest, TS-Morph",
       repoUrl: "https://github.com/cristhian-rojas/mutation-testing-ts",
       liveUrl: "https://mutation-ts-docs.example.com",
     },
     {
-      title: "Academic Brutalist Web CMS",
+      title: "Developer Brutalist Web CMS",
       description:
-        "A Next.js 16 and SQLite template generator adopting a high-contrast academic, minimalist, and brutalist styling aesthetic, optimized for publication portfolios and rapid CV deployments.",
-      content: `# Academic Brutalist Web CMS
+        "A Next.js 16 and SQLite template generator adopting a high-contrast, minimalist brutalist aesthetic, optimized for publication portfolios and rapid CV/Resume deployments.",
+      content: `# Developer Brutalist Web CMS
 
-A high-performance, minimalist CMS built for academics, computer scientists, and engineers who want to present papers, projects, and curriculum vitae without bloated web frameworks.
+A high-performance, developer-focused portfolio template built to showcase engineering projects and resume histories with zero client-side UI bloat.
 
-## Styling Principles
+## Engineering Highlights
 
-This project aligns with the Sci-Hub high-contrast interface aesthetic:
-- **Sharp Spacing**: Thin dividers, no rounded borders.
-- **Off-white Backgrounds**: High readability over long reading sessions.
-- **Monospace Headers**: Accentuates the codebase-centric feel.
-
-## Performance Metrics
-
-- **100/100** Lighthouse Performance, SEO, and Accessibility scores.
-- Zero client-side external UI library dependencies.
+- **Tailwind v4 Integration**: Uses CSS custom properties and inline variables to define styling tokens.
+- **Pure React Markdown Compiler**: Compiles long-form project pages with a custom regex parser instead of downloading heavy third-party markdown packages.
+- **Lighthouse Goals**: Reaches **100/100** scores on performance and SEO due to static pre-rendering and asset optimization.
 `,
       techStack: "Next.js, React, Tailwind CSS, Prisma, SQLite",
       repoUrl: "https://github.com/cristhian-rojas/brutalist-stack",
@@ -114,61 +105,61 @@ This project aligns with the Sci-Hub high-contrast interface aesthetic:
   // Seed Blog Posts
   const posts = [
     {
-      title: "Introduction to EEG Motor Imagery Classification",
-      slug: "eeg-motor-imagery-classification",
+      title: "Designing Low-Latency WebSockets for Real-Time Time Series Data",
+      slug: "websockets-latency-time-series",
       summary:
-        "An introductory guide on extracting spatial features and using convolutional neural networks to classify motor imagery tasks from electroencephalography signals.",
-      content: `# EEG Motor Imagery Classification
+        "An engineering post-mortem on designing a WebSocket server to pipe high-frequency EEG signals from a Python back-end to a React visualization client at sub-150ms speeds.",
+      content: `# Designing Low-Latency WebSockets for Time Series Data
 
-Brain-Computer Interfaces (BCIs) translate neural patterns into commands. One of the most common paradigms is **Motor Imagery (MI)**, where a user imagines performing a movement (such as raising their left or right hand) without muscle activation.
+Piping high-throughput biological signal data (such as 250Hz EEG feeds) into web frontends presents unique challenges for web browsers and network sockets.
 
-## 1. Neurophysiology of Motor Imagery
+## The Bottleneck: Rendering Frequency vs. Packet Frequency
 
-When a user imagines movement, a phenomenon called **Event-Related Desynchronization (ERD)** occurs in the mu (8-12 Hz) and beta (13-30 Hz) frequency bands of the sensorimotor cortex. Imagining a right-hand movement decreases mu power on the contralateral (left) hemisphere of the brain.
+Sending 250 individual WebSocket messages per second quickly saturates the browser's main thread and triggers UI jank due to excessive React re-renders. 
 
-## 2. Feature Extraction: Common Spatial Patterns (CSP)
+## Architectural Solutions
 
-To classify MI commands, we must extract spatial features that maximize differences in signal variance. **Common Spatial Patterns (CSP)** is a highly effective algorithm for this. It designs spatial filters that maximize the variance of one task while minimizing the variance of the other.
+### 1. Data Batching (Back-end)
+Instead of broadcasting single samples immediately, the Python server collects samples in a window buffer and sends them in **batches of 25 samples** (representing 100ms of data) 10 times a second.
 
-## 3. Deep Learning Classifier: EEGNet
+### 2. Message Structuring (Binary)
+JSON serialization adds significant overhead to numeric arrays. By switching to a **binary array buffer format (Float32Array)**, we reduced payload size by **62%**.
 
-While traditional pipelines use CSP followed by a Linear Discriminant Analysis (LDA) classifier, deep learning models like **EEGNet** combine feature extraction and classification:
-- **Temporal Convolutions**: Extract frequency filters.
-- **Depthwise Convolutions**: Extract spatial filters (analogous to CSP).
-- **Pointwise Convolutions**: Combine spatial features to output class predictions.
+### 3. React Canvas Rendering
+To avoid React state overhead, the incoming coordinates bypass React state altogether and are written directly onto an HTML5 \`<canvas>\` reference using a high-performance rendering loop (\`requestAnimationFrame\`).
 
-We will explore a complete PyTorch implementation of EEGNet in the next post.
+Implementing these optimizations kept our rendering loop stable at 60 FPS while keeping pipeline latency under **120ms**.
 `,
     },
     {
-      title: "Why Mutation Testing Matters for Software Quality",
-      slug: "why-mutation-testing-matters",
+      title: "Writing a Custom AST Parser for Code Mutation Testing",
+      slug: "custom-ast-mutation-testing",
       summary:
-        "Code coverage metrics are often misleading. In this article, we explain how mutation testing evaluates the actual strength of your test cases by injecting faults.",
-      content: `# Why Mutation Testing Matters
+        "A walkthrough on leveraging TypeScript compiler APIs to parse source files, manipulate logical syntax trees, and dynamically verify unit test assertions.",
+      content: `# Writing a Custom AST Parser for Mutation Testing
 
-Most software engineering teams rely on **Code Coverage** (line, branch, or function coverage) as the primary indicator of test quality. However, high coverage does not necessarily mean high test quality.
+Line coverage measures what lines were run, but not what was actually tested. Mutation testing ensures your assertions work by actively breaking your code.
 
-## The "Assertionless Test" Problem
+## How the Compiler Sees Code
 
-Consider a test case that runs a function, executes every line of code, but contains *no assertions*. It will report **100% line coverage**, yet it checks absolutely nothing. If a bug is introduced into that function, the test will still pass.
+Before code is executed, compilers translate source text into an **Abstract Syntax Tree (AST)**. For example, the statement:
+\`\`\`typescript
+const isAdult = age >= 18;
+\`\`\`
+Is parsed into a variable declaration with a binary expression containing a identifier (\`age\`), a comparison operator (\`>=\`), and a numeric literal (\`18\`).
 
-## Enter Mutation Testing
+## Manipulating the Syntax Tree
 
-Mutation testing evaluates the **detecting power** of your test suite by modifying your source code in subtle ways to create "mutants." Examples of mutation operators include:
-- **Arithmetic mutation**: Replacing \`+\` with \`-\`.
-- **Conditional mutation**: Replacing \`if (x > y)\` with \`if (x >= y)\`.
-- **Logical mutation**: Replacing \`&&\` with \`||\`.
+Using the TypeScript Compiler API (via the excellent \`ts-morph\` wrapper), we can programmatically rewrite nodes:
 
-If your test suite fails when executed against a mutant, the mutant is **killed** (good). If the tests still pass, the mutant **survives** (bad).
+1. **Locate Target Nodes**: Filter AST nodes for comparison expressions (\`>\`, \`<\`, \`===\`).
+2. **Rewrite Operator**: Swap the comparison token (e.g., changing \`>=\` to \`<\`).
+3. **Write to Disk**: Save the mutated file into a temporary scratch directory.
+4. **Execute Tests**: Run unit tests against the mutated source file.
 
-## The Mutation Score
+If tests pass, the mutant **survived** (assertion gap). If tests fail, the mutant is **killed** (strong tests).
 
-The quality of your test suite is represented by the **Mutation Score**:
-
-> **Mutation Score = (Killed Mutants / Total Mutants) * 100**
-
-Aiming for a high mutation score (e.g., >80%) ensures that your assertions are active and that any functional change in code logic will be caught by your CI pipeline.
+Spawning these runs in parallel Node worker pools makes AST analysis highly efficient and practical for continuous integration pipelines.
 `,
     },
   ];
