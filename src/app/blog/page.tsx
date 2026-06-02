@@ -13,7 +13,7 @@ export default async function BlogIndexPage() {
         <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
         <div className="space-y-2 pl-2">
           <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ Engineering Blog Archive ]
+            [ Engineering Blog ]
           </span>
           <h1 className="text-3xl font-bold font-mono tracking-tight">
             DEVELOPMENT JOURNAL & DISPATCHES
@@ -28,14 +28,14 @@ export default async function BlogIndexPage() {
       {posts.length === 0 ? (
         <div className="border-brutal bg-[#fafafa] p-12 text-center shadow-brutal space-y-4">
           <p className="font-mono text-sm text-[#1a1a1a]/60">
-            No entries written to the database journal yet.
+            No posts published yet.
           </p>
           <div className="flex justify-center">
             <Link
               href="/admin"
               className="px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-mono text-xs hover:bg-[#1a1a1a] transition-all shadow-brutal"
             >
-              [Access CMS Dashboard &rarr;]
+              [Admin Dashboard &rarr;]
             </Link>
           </div>
         </div>

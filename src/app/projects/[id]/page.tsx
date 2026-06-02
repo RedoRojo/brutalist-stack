@@ -22,7 +22,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Back link */}
       <div className="font-mono text-xs">
         <Link href="/projects" className="text-[#c02b2b] hover:underline">
-          [&larr; Back to Projects Archive]
+          [&larr; Back to Projects]
         </Link>
       </div>
 
@@ -31,13 +31,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
 
         <div className="pl-3 space-y-4">
-          <div className="border-b border-[#1a1a1a]/10 pb-3 flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+          <div className="border-b border-[#1a1a1a]/10 pb-3">
             <h1 className="text-2xl sm:text-3xl font-bold font-mono tracking-tight uppercase">
               {project.title}
             </h1>
-            <span className="font-mono text-[10px] text-[#1a1a1a]/40 bg-[#1a1a1a]/5 px-2 py-0.5 border border-[#1a1a1a]/10 self-start sm:self-center">
-              ID: {project.id.slice(0, 8)}
-            </span>
           </div>
 
           {/* Core Info */}
@@ -73,7 +70,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="text-[#c02b2b] font-bold hover:underline"
               >
-                [Access Repository]
+                [View Source Code]
               </a>
             )}
             {project.liveUrl && (
@@ -83,7 +80,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="text-[#2c5f4b] font-bold hover:underline"
               >
-                [Launch Live Demo]
+                [View Live Site]
               </a>
             )}
           </div>
@@ -93,7 +90,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Main Markdown Body Content */}
       <section className="border-brutal bg-white p-6 sm:p-8 shadow-brutal space-y-4">
         <div className="font-mono text-xs text-[#1a1a1a]/50 border-b border-[#1a1a1a]/10 pb-2 mb-4 uppercase">
-          // Project Documentation
+          Project Documentation
         </div>
         
         {project.content ? (
@@ -102,7 +99,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         ) : (
           <div className="border border-dashed border-[#1a1a1a]/20 p-6 text-center bg-[#1a1a1a]/5 font-mono text-xs text-[#1a1a1a]/50">
-            No further documentation has been compiled for this project record.
+            No further details are currently available for this project.
           </div>
         )}
       </section>

@@ -44,7 +44,7 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} className="space-y-4 font-mono">
         <div className="space-y-2">
           <label htmlFor="pass" className="text-xs font-bold uppercase tracking-wider block">
-            Enter admin passcode:
+            Enter admin password:
           </label>
           <input
             id="pass"
@@ -68,7 +68,7 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-bold text-sm tracking-wide uppercase hover:bg-[#1a1a1a] transition-all cursor-pointer shadow-brutal disabled:opacity-50"
         >
-          {loading ? "[Authenticating...]" : "[Verify Passcode]"}
+          {loading ? "[Logging in...]" : "[Sign In]"}
         </button>
       </form>
     </div>

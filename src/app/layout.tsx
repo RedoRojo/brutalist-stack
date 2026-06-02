@@ -38,7 +38,7 @@ export default function RootLayout({
                 CRISTHIAN VICTOR ROJAS MARQUEZ
               </a>
               <p className="font-mono text-xs text-[#1a1a1a]/60 mt-0.5">
-                [LOC: /usr/bin/portfolio]
+                [Location: Cochabamba, Bolivia]
               </p>
             </div>
             
@@ -68,11 +68,9 @@ export default function RootLayout({
         <footer className="border-t border-[#1a1a1a]/10 mt-12 bg-[#fafafa] py-6 text-xs font-mono text-[#1a1a1a]/60">
           <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <span>SYSTEM: ONLINE</span>
+              <span>Software Engineer Portfolio</span>
               <span className="mx-2">|</span>
-              <span>HOST: LOCALHOST</span>
-              <span className="mx-2">|</span>
-              <span>DB: POSTGRESQL</span>
+              <span>Next.js & PostgreSQL</span>
             </div>
             <div>
               <span>© {new Date().getFullYear()} Cristhian Victor Rojas Marquez</span>

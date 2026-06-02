@@ -87,7 +87,7 @@ export default async function Home() {
         <section className="md:col-span-7 border-brutal bg-[#fafafa] p-6 shadow-brutal relative">
           <div className="absolute top-0 left-0 w-full h-1 bg-[#2c5f4b]" />
           <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 mb-4 flex items-center gap-2">
-            <span className="text-[#2c5f4b]">■</span> Skills Inventory
+            <span className="text-[#2c5f4b]">■</span> Technical Skills
           </h2>
           <p className="text-xs font-mono text-[#1a1a1a]/60 mb-4">
             Core technologies, programming languages, and software frameworks:
@@ -108,7 +108,7 @@ export default async function Home() {
         <section className="md:col-span-5 border-brutal bg-[#fafafa] p-6 shadow-brutal flex flex-col justify-between">
           <div className="space-y-4">
             <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 flex items-center gap-2">
-              <span className="text-[#c02b2b]">■</span> Neurotech Systems
+              <span className="text-[#c02b2b]">■</span> Neurotech Applications
             </h2>
             <div className="border border-[#1a1a1a]/10 bg-white p-2">
               <Image
@@ -131,7 +131,7 @@ export default async function Home() {
       <section className="border-brutal bg-[#fafafa] p-6 sm:p-8 shadow-brutal">
         <div className="flex justify-between items-center border-b border-[#1a1a1a]/10 pb-3 mb-6">
           <h2 className="text-xl font-bold font-mono flex items-center gap-2">
-            <span className="text-[#c02b2b]">■</span> Recent Projects
+            <span className="text-[#c02b2b]">■</span> Featured Projects
           </h2>
           <Link
             href="/projects"
@@ -144,10 +144,10 @@ export default async function Home() {
         {featuredProjects.length === 0 ? (
           <div className="border border-dashed border-[#1a1a1a]/20 p-8 text-center bg-[#1a1a1a]/5">
             <p className="font-mono text-sm text-[#1a1a1a]/60">
-              No projects indexed in the SQLite database yet.
+              No projects have been published yet.
             </p>
             <p className="font-mono text-xs text-[#1a1a1a]/40 mt-2">
-              Go to <Link href="/admin" className="text-[#c02b2b] underline">/admin</Link> to initialize data.
+              Please check back later or visit the <Link href="/admin" className="text-[#c02b2b] underline">Admin Panel</Link> to add data.
             </p>
           </div>
         ) : (

@@ -263,7 +263,7 @@ export default function AdminDashboardClient({
               : "bg-[#1a1a1a]/5 border-b-[#1a1a1a] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all"
           }`}
         >
-          [Projects CMS]
+          [Projects]
         </button>
         <button
           onClick={() => {
@@ -276,7 +276,7 @@ export default function AdminDashboardClient({
               : "bg-[#1a1a1a]/5 border-b-[#1a1a1a] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all"
           }`}
         >
-          [Blog CMS]
+          [Blog Posts]
         </button>
       </div>
 
@@ -288,7 +288,7 @@ export default function AdminDashboardClient({
               : "border-[#2c5f4b]/30 bg-[#2c5f4b]/5 text-[#2c5f4b]"
           }`}
         >
-          SYSTEM STATUS: {message.text}
+          Status: {message.text}
         </div>
       )}
 
@@ -299,7 +299,7 @@ export default function AdminDashboardClient({
           disabled={loading}
           className="px-3 py-1.5 border border-[#1a1a1a] bg-transparent text-[#c02b2b] hover:bg-[#c02b2b] hover:text-[#fafafa] transition-all cursor-pointer disabled:opacity-50"
         >
-          [Terminate Session]
+          [Log Out]
         </button>
       </div>
 
@@ -430,12 +430,12 @@ export default function AdminDashboardClient({
           <div className="lg:col-span-6 space-y-4">
             <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-4">
               <h2 className="text-lg font-bold font-mono uppercase border-b border-[#1a1a1a]/10 pb-2">
-                [Projects Inventory]
+                [Projects List]
               </h2>
 
               {initialProjects.length === 0 ? (
                 <div className="border border-dashed border-[#1a1a1a]/20 p-8 text-center bg-[#1a1a1a]/5 font-mono text-sm text-[#1a1a1a]/60">
-                  No projects indexed.
+                  No projects found.
                 </div>
               ) : (
                 <div className="space-y-4 max-h-[700px] overflow-y-auto pr-1">
@@ -582,12 +582,12 @@ export default function AdminDashboardClient({
           <div className="lg:col-span-6 space-y-4">
             <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-4">
               <h2 className="text-lg font-bold font-mono uppercase border-b border-[#1a1a1a]/10 pb-2">
-                [Blog Posts Inventory]
+                [Blog Posts List]
               </h2>
 
               {initialPosts.length === 0 ? (
                 <div className="border border-dashed border-[#1a1a1a]/20 p-8 text-center bg-[#1a1a1a]/5 font-mono text-sm text-[#1a1a1a]/60">
-                  No blog posts indexed.
+                  No blog posts found.
                 </div>
               ) : (
                 <div className="space-y-4 max-h-[700px] overflow-y-auto pr-1">
