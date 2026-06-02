@@ -22,7 +22,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       {/* Back link */}
       <div className="font-mono text-xs">
         <Link href="/blog" className="text-[#c02b2b] hover:underline">
-          [&larr; BACK_TO_JOURNAL_ARCHIVE.db]
+          [&larr; Back to Blog Archive]
         </Link>
       </div>
 
@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       {/* Main Markdown Body Content */}
       <section className="border-brutal bg-white p-6 sm:p-8 shadow-brutal space-y-4">
         <div className="font-mono text-xs text-[#1a1a1a]/50 border-b border-[#1a1a1a]/10 pb-2 mb-4 uppercase">
-          // JOURNAL_ENTRY_BODY.md
+          // Journal Entry
         </div>
         
         <div className="prose prose-zinc max-w-none">

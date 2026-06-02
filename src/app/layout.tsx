@@ -72,7 +72,7 @@ export default function RootLayout({
               <span className="mx-2">|</span>
               <span>HOST: LOCALHOST</span>
               <span className="mx-2">|</span>
-              <span>DB: SQLITE3</span>
+              <span>DB: POSTGRESQL</span>
             </div>
             <div>
               <span>© {new Date().getFullYear()} Cristhian Victor Rojas Marquez</span>

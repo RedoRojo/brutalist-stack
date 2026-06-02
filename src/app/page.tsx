@@ -87,7 +87,7 @@ export default async function Home() {
         <section className="md:col-span-7 border-brutal bg-[#fafafa] p-6 shadow-brutal relative">
           <div className="absolute top-0 left-0 w-full h-1 bg-[#2c5f4b]" />
           <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 mb-4 flex items-center gap-2">
-            <span className="text-[#2c5f4b]">■</span> SKILLS_INVENTORY.log
+            <span className="text-[#2c5f4b]">■</span> Skills Inventory
           </h2>
           <p className="text-xs font-mono text-[#1a1a1a]/60 mb-4">
             Core technologies, programming languages, and software frameworks:
@@ -108,7 +108,7 @@ export default async function Home() {
         <section className="md:col-span-5 border-brutal bg-[#fafafa] p-6 shadow-brutal flex flex-col justify-between">
           <div className="space-y-4">
             <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 flex items-center gap-2">
-              <span className="text-[#c02b2b]">■</span> NEUROTECH_SYSTEMS
+              <span className="text-[#c02b2b]">■</span> Neurotech Systems
             </h2>
             <div className="border border-[#1a1a1a]/10 bg-white p-2">
               <Image
@@ -131,7 +131,7 @@ export default async function Home() {
       <section className="border-brutal bg-[#fafafa] p-6 sm:p-8 shadow-brutal">
         <div className="flex justify-between items-center border-b border-[#1a1a1a]/10 pb-3 mb-6">
           <h2 className="text-xl font-bold font-mono flex items-center gap-2">
-            <span className="text-[#c02b2b]">■</span> RECENT_PROJECTS.db
+            <span className="text-[#c02b2b]">■</span> Recent Projects
           </h2>
           <Link
             href="/projects"

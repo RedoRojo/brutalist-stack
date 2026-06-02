@@ -25,7 +25,7 @@ export default async function ProjectsPage() {
         <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
         <div className="space-y-2 pl-2">
           <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ ARCHIVE: PROJECTS_PORTFOLIO.db ]
+            [ Projects Archive ]
           </span>
           <h1 className="text-3xl font-bold font-mono tracking-tight">
             PROJECTS & CONTRIBUTIONS
@@ -77,7 +77,7 @@ export default async function ProjectsPage() {
                 {project.techStack && (
                   <div className="space-y-1.5">
                     <span className="text-[10px] font-mono text-[#1a1a1a]/50 uppercase tracking-wider block">
-                      TECH_STACK:
+                      Tech Stack:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {project.techStack.split(",").map((tech) => (

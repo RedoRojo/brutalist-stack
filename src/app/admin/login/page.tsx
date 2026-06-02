@@ -34,7 +34,7 @@ export default function LoginPage() {
     <div className="max-w-md mx-auto my-12 border-brutal bg-[#fafafa] p-8 shadow-brutal space-y-6">
       <div className="space-y-2 border-b border-[#1a1a1a]/10 pb-4">
         <h1 className="text-xl font-bold font-mono uppercase tracking-tight flex items-center gap-2">
-          <span className="text-[#c02b2b]">■</span> ACCESS_RESTRICTED.sh
+          <span className="text-[#c02b2b]">■</span> Access Restricted
         </h1>
         <p className="text-xs font-mono text-[#1a1a1a]/60">
           Administrator credentials required.
@@ -68,7 +68,7 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-bold text-sm tracking-wide uppercase hover:bg-[#1a1a1a] transition-all cursor-pointer shadow-brutal disabled:opacity-50"
         >
-          {loading ? "[AUTHENTICATING...]" : "[VERIFY_PASSCODE]"}
+          {loading ? "[Authenticating...]" : "[Verify Passcode]"}
         </button>
       </form>
     </div>

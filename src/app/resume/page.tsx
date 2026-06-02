@@ -11,12 +11,12 @@ export default function ResumePage() {
     <div className="space-y-8 max-w-3xl mx-auto print:max-w-none print:px-0">
       {/* Print Action / Document Header info */}
       <div className="flex justify-between items-center font-mono text-xs print:hidden">
-        <span>[ DOCUMENT: RESUME_ENGINEER.pdf ]</span>
+        <span>[ DOCUMENT: RESUME ]</span>
         <button
           onClick={handlePrint}
           className="px-3 py-1.5 border border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] transition-all cursor-pointer shadow-brutal active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1a1a1a]"
         >
-          [PRINT_RESUME]
+          [Print Resume]
         </button>
       </div>
 

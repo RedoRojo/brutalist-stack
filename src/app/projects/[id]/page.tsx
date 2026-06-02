@@ -22,7 +22,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Back link */}
       <div className="font-mono text-xs">
         <Link href="/projects" className="text-[#c02b2b] hover:underline">
-          [&larr; BACK_TO_PROJECTS_ARCHIVE.db]
+          [&larr; Back to Projects Archive]
         </Link>
       </div>
 
@@ -93,7 +93,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Main Markdown Body Content */}
       <section className="border-brutal bg-white p-6 sm:p-8 shadow-brutal space-y-4">
         <div className="font-mono text-xs text-[#1a1a1a]/50 border-b border-[#1a1a1a]/10 pb-2 mb-4 uppercase">
-          // PROJECT_DOCUMENTATION.md
+          // Project Documentation
         </div>
         
         {project.content ? (

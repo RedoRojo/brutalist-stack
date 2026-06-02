@@ -13,10 +13,10 @@ export default async function BlogIndexPage() {
         <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
         <div className="space-y-2 pl-2">
           <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ ARCHIVE: ENGINEERING_BLOG.db ]
+            [ Engineering Blog Archive ]
           </span>
           <h1 className="text-3xl font-bold font-mono tracking-tight">
-            THE DEV LOG & DISPATCHES
+            DEVELOPMENT JOURNAL & DISPATCHES
           </h1>
           <p className="text-sm font-mono text-[#1a1a1a]/60">
             Technical write-ups, post-mortems, and development notes on software engineering and system design.

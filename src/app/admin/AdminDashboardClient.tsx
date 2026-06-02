@@ -263,7 +263,7 @@ export default function AdminDashboardClient({
               : "bg-[#1a1a1a]/5 border-b-[#1a1a1a] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all"
           }`}
         >
-          [PROJECTS_CMS.db]
+          [Projects CMS]
         </button>
         <button
           onClick={() => {
@@ -276,7 +276,7 @@ export default function AdminDashboardClient({
               : "bg-[#1a1a1a]/5 border-b-[#1a1a1a] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all"
           }`}
         >
-          [BLOG_CMS.db]
+          [Blog CMS]
         </button>
       </div>
 
@@ -312,7 +312,7 @@ export default function AdminDashboardClient({
             <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-4">
               <div className="border-b border-[#1a1a1a]/10 pb-2 flex justify-between items-center">
                 <h2 className="text-lg font-bold font-mono uppercase">
-                  {editingProjectId ? "[EDIT_PROJECT.exec]" : "[CREATE_PROJECT.exec]"}
+                  {editingProjectId ? "[Edit Project]" : "[Create Project]"}
                 </h2>
                 {editingProjectId && (
                   <button
@@ -421,7 +421,7 @@ export default function AdminDashboardClient({
                   disabled={loading}
                   className="w-full px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-bold uppercase tracking-wide hover:bg-[#1a1a1a] transition-all cursor-pointer shadow-brutal disabled:opacity-50"
                 >
-                  {editingProjectId ? "[UPDATE_PROJECT]" : "[SAVE_PROJECT]"}
+                  {editingProjectId ? "[Update Project]" : "[Save Project]"}
                 </button>
               </form>
             </div>
@@ -430,7 +430,7 @@ export default function AdminDashboardClient({
           <div className="lg:col-span-6 space-y-4">
             <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-4">
               <h2 className="text-lg font-bold font-mono uppercase border-b border-[#1a1a1a]/10 pb-2">
-                [PROJECTS_INVENTORY.db]
+                [Projects Inventory]
               </h2>
 
               {initialProjects.length === 0 ? (
@@ -493,7 +493,7 @@ export default function AdminDashboardClient({
             <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-4">
               <div className="border-b border-[#1a1a1a]/10 pb-2 flex justify-between items-center">
                 <h2 className="text-lg font-bold font-mono uppercase">
-                  {editingPostId ? "[EDIT_BLOG_POST.exec]" : "[CREATE_BLOG_POST.exec]"}
+                  {editingPostId ? "[Edit Blog Post]" : "[Create Blog Post]"}
                 </h2>
                 {editingPostId && (
                   <button
@@ -573,7 +573,7 @@ export default function AdminDashboardClient({
                   disabled={loading}
                   className="w-full px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-bold uppercase tracking-wide hover:bg-[#1a1a1a] transition-all cursor-pointer shadow-brutal disabled:opacity-50"
                 >
-                  {editingPostId ? "[UPDATE_BLOG_POST]" : "[SAVE_BLOG_POST]"}
+                  {editingPostId ? "[Update Blog Post]" : "[Save Blog Post]"}
                 </button>
               </form>
             </div>
@@ -582,7 +582,7 @@ export default function AdminDashboardClient({
           <div className="lg:col-span-6 space-y-4">
             <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-4">
               <h2 className="text-lg font-bold font-mono uppercase border-b border-[#1a1a1a]/10 pb-2">
-                [BLOG_INVENTORY.db]
+                [Blog Posts Inventory]
               </h2>
 
               {initialPosts.length === 0 ? (
