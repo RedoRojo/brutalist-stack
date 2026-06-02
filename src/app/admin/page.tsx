@@ -22,7 +22,7 @@ export default async function AdminPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pl-2">
           <div className="space-y-1">
             <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-              [ ACCESS_GRANTED: ADMIN_CMS.sys ]
+              [ ACCESS GRANTED: ADMIN CMS ]
             </span>
             <h1 className="text-3xl font-bold font-mono tracking-tight">
               ADMIN CONTROL PANEL

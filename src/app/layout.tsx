@@ -35,7 +35,7 @@ export default function RootLayout({
           <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <a href="/" className="font-mono font-bold text-lg tracking-tight hover:text-[#c02b2b]">
-                CRISTHIAN_VICTOR_ROJAS_MARQUEZ.txt
+                CRISTHIAN VICTOR ROJAS MARQUEZ
               </a>
               <p className="font-mono text-xs text-[#1a1a1a]/60 mt-0.5">
                 [LOC: /usr/bin/portfolio]
