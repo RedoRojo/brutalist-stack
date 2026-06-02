@@ -180,6 +180,17 @@ export async function getPostBySlug(slug: string) {
   }
 }
 
+export async function getPostById(id: string) {
+  try {
+    return await prisma.post.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error(`Failed to fetch post ${id}:`, error);
+    return null;
+  }
+}
+
 export async function createPost(formData: {
   title: string;
   slug: string;
