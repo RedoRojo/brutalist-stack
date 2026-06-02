@@ -55,9 +55,6 @@ export default function RootLayout({
               <a href="/blog" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
                 [blog]
               </a>
-              <a href="/admin" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
-                [admin]
-              </a>
             </nav>
           </div>
         </header>
