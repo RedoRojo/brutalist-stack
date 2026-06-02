@@ -59,15 +59,12 @@ export default async function ProjectsPage() {
               className="border-brutal bg-white p-6 shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-red transition-all flex flex-col justify-between"
             >
               <div className="space-y-4">
-                <div className="flex justify-between items-start border-b border-[#1a1a1a]/10 pb-2">
+                <div className="border-b border-[#1a1a1a]/10 pb-2">
                   <h2 className="font-mono font-bold text-lg hover:text-[#c02b2b] transition-colors">
                     <Link href={`/projects/${project.id}`}>
                       {project.title}
                     </Link>
                   </h2>
-                  <span className="font-mono text-[10px] text-[#1a1a1a]/40 bg-[#1a1a1a]/5 px-2 py-0.5 border border-[#1a1a1a]/10">
-                    ID: {project.id.slice(0, 8)}
-                  </span>
                 </div>
                 
                 <p className="text-sm font-sans leading-relaxed text-[#1a1a1a]/85 min-h-[4rem]">
