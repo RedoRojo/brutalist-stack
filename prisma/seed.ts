@@ -1,11 +1,22 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import path from "path";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { Pool } from "pg";
 
 async function main() {
-  const dbPath = path.join(process.cwd(), "dev.db");
-  const dbUrl = `file:${dbPath}`;
-  const adapter = new PrismaBetterSqlite3({ url: dbUrl });
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    throw new Error("DATABASE_URL environment variable is missing.");
+  }
+
+  const pool = new Pool({
+    connectionString,
+    ssl: connectionString.includes("localhost") || connectionString.includes("127.0.0.1")
+      ? undefined
+      : { rejectUnauthorized: false },
+  });
+  
+  const adapter = new PrismaPg(pool);
   const prisma = new PrismaClient({ adapter });
 
   console.log("Seeding database...");
