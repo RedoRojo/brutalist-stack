@@ -42,8 +42,8 @@ export default function BlogFormClient() {
         router.push("/admin");
         router.refresh();
       }
-    } catch (err: any) {
-      setError(err.message || "An error occurred while creating the post.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred while creating the post.");
       setLoading(false);
     }
   }

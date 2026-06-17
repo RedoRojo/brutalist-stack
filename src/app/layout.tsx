@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({
@@ -34,27 +35,27 @@ export default function RootLayout({
         <header className="border-b border-[#1a1a1a] sticky top-0 bg-[#fafafa]/90 backdrop-blur-sm z-50">
           <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <a href="/" className="font-mono font-bold text-lg tracking-tight hover:text-[#c02b2b]">
+              <Link href="/" className="font-mono font-bold text-lg tracking-tight hover:text-[#c02b2b]">
                 CRISTHIAN VICTOR ROJAS MARQUEZ
-              </a>
+              </Link>
               <p className="font-mono text-xs text-[#1a1a1a]/60 mt-0.5">
                 [Location: Cochabamba, Bolivia]
               </p>
             </div>
             
             <nav className="flex items-center flex-wrap gap-1 sm:gap-2 font-mono text-sm">
-              <a href="/" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
+              <Link href="/" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
                 [about]
-              </a>
-              <a href="/projects" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
+              </Link>
+              <Link href="/projects" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
                 [projects]
-              </a>
-              <a href="/resume" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
+              </Link>
+              <Link href="/resume" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
                 [resume]
-              </a>
-              <a href="/blog" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
+              </Link>
+              <Link href="/blog" className="px-2 py-1 border border-transparent hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all">
                 [blog]
-              </a>
+              </Link>
             </nav>
           </div>
         </header>

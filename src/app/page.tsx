@@ -65,12 +65,12 @@ export default async function Home() {
           </div>
 
           <div className="pt-2 flex flex-wrap gap-3 font-mono text-sm">
-            <a
+            <Link
               href="/projects"
               className="px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] hover:bg-[#1a1a1a] hover:text-[#fafafa] transition-all"
             >
               [View Projects]
-            </a>
+            </Link>
             <a
               href="mailto:cristhian.rojas@example.com"
               className="px-4 py-2 border border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] transition-all"

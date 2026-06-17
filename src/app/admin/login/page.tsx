@@ -23,7 +23,7 @@ export default function LoginPage() {
       } else {
         setError(res.error || "Authentication failed");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred.");
     } finally {
       setLoading(false);

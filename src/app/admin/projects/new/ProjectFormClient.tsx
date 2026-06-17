@@ -37,8 +37,8 @@ export default function ProjectFormClient() {
         router.push("/admin");
         router.refresh();
       }
-    } catch (err: any) {
-      setError(err.message || "An error occurred while creating the project.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred while creating the project.");
       setLoading(false);
     }
   }

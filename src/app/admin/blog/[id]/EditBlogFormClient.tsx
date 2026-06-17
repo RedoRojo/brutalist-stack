@@ -45,8 +45,8 @@ export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
         router.push("/admin");
         router.refresh();
       }
-    } catch (err: any) {
-      setError(err.message || "An error occurred while updating the post.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred while updating the post.");
       setLoading(false);
     }
   }

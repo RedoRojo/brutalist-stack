@@ -51,8 +51,8 @@ export default function EditProjectFormClient({ project }: EditProjectFormClient
         router.push("/admin");
         router.refresh();
       }
-    } catch (err: any) {
-      setError(err.message || "An error occurred while updating the project.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred while updating the project.");
       setLoading(false);
     }
   }

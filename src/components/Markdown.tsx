@@ -68,6 +68,7 @@ export default function Markdown({ content }: MarkdownProps) {
       const url = line.substring(urlStart, urlEnd);
       elements.push(
         <div key={i} className="border border-[#1a1a1a]/15 bg-white p-2 my-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={url} alt={alt} className="max-w-full h-auto grayscale contrast-125 object-cover mx-auto" />
           <span className="text-[10px] font-mono text-[#1a1a1a]/50 text-center block mt-1.5">{alt}</span>
         </div>

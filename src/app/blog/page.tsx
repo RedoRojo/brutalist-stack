@@ -41,7 +41,7 @@ export default async function BlogIndexPage() {
         </div>
       ) : (
         <div className="border-brutal bg-white p-6 shadow-brutal space-y-6 divide-y divide-[#1a1a1a]/10">
-          {posts.map((post, idx) => (
+          {posts.map((post) => (
             <article
               key={post.id}
               className={`pt-6 first:pt-0 flex flex-col md:flex-row md:items-baseline md:justify-between gap-4`}

@@ -33,13 +33,18 @@ if (typeof window === "undefined") {
   } else {
     // Fallback proxy to prevent build-time crashes if DATABASE_URL is not set yet.
     // Will throw a descriptive error only when a database query is actually executed.
+    const throwDbMissing = () => {
+      throw new Error(
+        "DATABASE_URL is missing. Please configure your PostgreSQL connection string in environment variables."
+      );
+    };
     prismaInstance = new Proxy({} as PrismaClient, {
-      get(target, prop) {
-        return () => {
-          throw new Error(
-            "DATABASE_URL is missing. Please configure your PostgreSQL connection string in environment variables."
-          );
-        };
+      get() {
+        return new Proxy(throwDbMissing, {
+          get() {
+            return throwDbMissing;
+          },
+        });
       },
     });
   }

@@ -70,7 +70,7 @@ export default function AdminDashboardClient({
       await logoutAdmin();
       router.push("/admin/login");
       router.refresh();
-    } catch (err) {
+    } catch {
       setMessage({ text: "Failed to logout.", isError: true });
       setLoading(false);
     }
@@ -86,8 +86,9 @@ export default function AdminDashboardClient({
         setMessage({ text: "Project deleted successfully.", isError: false });
         router.refresh();
       }
-    } catch (err: any) {
-      setMessage({ text: err.message || "An error occurred.", isError: true });
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : "An error occurred.";
+      setMessage({ text: errMsg, isError: true });
     } finally {
       setLoading(false);
     }
@@ -103,8 +104,9 @@ export default function AdminDashboardClient({
         setMessage({ text: "Blog post deleted successfully.", isError: false });
         router.refresh();
       }
-    } catch (err: any) {
-      setMessage({ text: err.message || "An error occurred.", isError: true });
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : "An error occurred.";
+      setMessage({ text: errMsg, isError: true });
     } finally {
       setLoading(false);
     }
