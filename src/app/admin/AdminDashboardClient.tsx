@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { deleteProject, deletePost, logoutAdmin } from "./actions";
+import Card from "@/components/Card";
 
 interface Project {
   id: string;
@@ -40,30 +41,38 @@ export default function AdminDashboardClient({
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"projects" | "blog">("projects");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null);
+  const [message, setMessage] = useState<{
+    text: string;
+    isError: boolean;
+  } | null>(null);
 
-  // Compute Metrics & Stats
   const totalProjects = initialProjects.length;
   const totalPosts = initialPosts.length;
 
-  // Extract unique tech stack tags
   const uniqueTechTags = Array.from(
     new Set(
       initialProjects
-        .flatMap((p) => p.techStack ? p.techStack.split(",").map((t) => t.trim()) : [])
+        .flatMap((p) =>
+          p.techStack ? p.techStack.split(",").map((t) => t.trim()) : []
+        )
         .filter((t) => t.length > 0)
     )
   );
 
-  const lastProjectUpdate = initialProjects.length > 0
-    ? new Date(Math.max(...initialProjects.map((p) => new Date(p.updatedAt).getTime())))
-    : null;
+  const lastProjectUpdate =
+    initialProjects.length > 0
+      ? new Date(
+          Math.max(...initialProjects.map((p) => new Date(p.updatedAt).getTime()))
+        )
+      : null;
 
-  const lastBlogUpdate = initialPosts.length > 0
-    ? new Date(Math.max(...initialPosts.map((p) => new Date(p.updatedAt).getTime())))
-    : null;
+  const lastBlogUpdate =
+    initialPosts.length > 0
+      ? new Date(
+          Math.max(...initialPosts.map((p) => new Date(p.updatedAt).getTime()))
+        )
+      : null;
 
-  // Handlers
   async function handleLogout() {
     setLoading(true);
     try {
@@ -77,13 +86,13 @@ export default function AdminDashboardClient({
   }
 
   async function handleProjectDelete(id: string, title: string) {
-    if (!confirm(`Are you sure you want to delete project "${title}"?`)) return;
+    if (!confirm(`Delete project "${title}"?`)) return;
     setLoading(true);
     setMessage(null);
     try {
       const res = await deleteProject(id);
       if (res.success) {
-        setMessage({ text: "Project deleted successfully.", isError: false });
+        setMessage({ text: "Project deleted.", isError: false });
         router.refresh();
       }
     } catch (err) {
@@ -95,13 +104,13 @@ export default function AdminDashboardClient({
   }
 
   async function handlePostDelete(id: string, title: string) {
-    if (!confirm(`Are you sure you want to delete blog post "${title}"?`)) return;
+    if (!confirm(`Delete blog post "${title}"?`)) return;
     setLoading(true);
     setMessage(null);
     try {
       const res = await deletePost(id);
       if (res.success) {
-        setMessage({ text: "Blog post deleted successfully.", isError: false });
+        setMessage({ text: "Blog post deleted.", isError: false });
         router.refresh();
       }
     } catch (err) {
@@ -114,185 +123,193 @@ export default function AdminDashboardClient({
 
   return (
     <div className="space-y-8">
-      {/* 1. Extended Statistics Overview */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
-        {/* Metric 1 */}
-        <div className="border-brutal bg-white p-5 shadow-brutal flex flex-col justify-between">
-          <span className="text-[10px] text-[#1a1a1a]/50 uppercase font-bold tracking-wider">
+      {/* Stats Overview */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="flex flex-col justify-between">
+          <span className="text-[10px] font-mono text-ash uppercase tracking-wider">
             Total Projects
           </span>
           <div className="flex items-baseline justify-between mt-2">
-            <span className="text-3xl font-extrabold">{totalProjects}</span>
-            <span className="text-xs text-[#2c5f4b] font-bold">Published</span>
+            <span className="text-3xl font-mono font-bold text-bone">{totalProjects}</span>
+            <span className="text-xs font-mono text-rust">Published</span>
           </div>
           {lastProjectUpdate && (
-            <span className="text-[9px] text-[#1a1a1a]/40 mt-3 block">
+            <span className="text-[9px] text-ash mt-3 block">
               Last updated: {lastProjectUpdate.toLocaleDateString()}
             </span>
           )}
-        </div>
+        </Card>
 
-        {/* Metric 2 */}
-        <div className="border-brutal bg-white p-5 shadow-brutal flex flex-col justify-between">
-          <span className="text-[10px] text-[#1a1a1a]/50 uppercase font-bold tracking-wider">
+        <Card className="flex flex-col justify-between">
+          <span className="text-[10px] font-mono text-ash uppercase tracking-wider">
             Total Articles
           </span>
           <div className="flex items-baseline justify-between mt-2">
-            <span className="text-3xl font-extrabold">{totalPosts}</span>
-            <span className="text-xs text-[#2c5f4b] font-bold">Published</span>
+            <span className="text-3xl font-mono font-bold text-bone">{totalPosts}</span>
+            <span className="text-xs font-mono text-rust">Published</span>
           </div>
           {lastBlogUpdate && (
-            <span className="text-[9px] text-[#1a1a1a]/40 mt-3 block">
+            <span className="text-[9px] text-ash mt-3 block">
               Last updated: {lastBlogUpdate.toLocaleDateString()}
             </span>
           )}
-        </div>
+        </Card>
 
-        {/* Metric 3 */}
-        <div className="border-brutal bg-white p-5 shadow-brutal flex flex-col justify-between">
-          <span className="text-[10px] text-[#1a1a1a]/50 uppercase font-bold tracking-wider">
+        <Card className="flex flex-col justify-between">
+          <span className="text-[10px] font-mono text-ash uppercase tracking-wider">
             Unique Technologies
           </span>
           <div className="flex items-baseline justify-between mt-2">
-            <span className="text-3xl font-extrabold">{uniqueTechTags.length}</span>
-            <span className="text-xs text-[#c02b2b] font-bold">Tags Used</span>
+            <span className="text-3xl font-mono font-bold text-bone">{uniqueTechTags.length}</span>
+            <span className="text-xs font-mono text-rust">Tags Used</span>
           </div>
-          <span className="text-[9px] text-[#1a1a1a]/40 mt-3 block truncate">
-            {uniqueTechTags.slice(0, 3).join(", ")}{uniqueTechTags.length > 3 ? "..." : ""}
+          <span className="text-[9px] text-ash mt-3 block truncate">
+            {uniqueTechTags.slice(0, 3).join(", ")}
+            {uniqueTechTags.length > 3 ? "..." : ""}
           </span>
-        </div>
+        </Card>
 
-        {/* Metric 4 */}
-        <div className="border-brutal bg-white p-5 shadow-brutal flex flex-col justify-between">
-          <span className="text-[10px] text-[#1a1a1a]/50 uppercase font-bold tracking-wider">
+        <Card className="flex flex-col justify-between">
+          <span className="text-[10px] font-mono text-ash uppercase tracking-wider">
             Infrastructure Status
           </span>
           <div className="flex items-baseline justify-between mt-2">
-            <span className="text-sm font-extrabold uppercase tracking-tight text-[#2c5f4b]">
+            <span className="text-sm font-mono font-bold uppercase tracking-tight text-bone">
               PostgreSQL
             </span>
-            <span className="px-1.5 py-0.5 text-[9px] bg-[#2c5f4b]/10 text-[#2c5f4b] border border-[#2c5f4b]/20 font-bold">
+            <span className="px-1.5 py-0.5 text-[9px] bg-rust/10 text-rust border border-rust/20 font-mono font-bold">
               CONNECTED
             </span>
           </div>
-          <span className="text-[9px] text-[#1a1a1a]/40 mt-3 block">
+          <span className="text-[9px] text-ash mt-3 block">
             Database: Neon Cloud Host
           </span>
-        </div>
+        </Card>
       </section>
 
-      {/* Action Row & Status Banners */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 max-w-5xl mx-auto">
+      {/* Status + Logout */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="w-full md:w-auto">
           {message && (
             <div
-              className={`border p-3 text-xs font-mono max-w-xl ${
+              className={`border p-3 text-xs font-mono ${
                 message.isError
-                  ? "border-[#c02b2b]/30 bg-[#c02b2b]/5 text-[#c02b2b]"
-                  : "border-[#2c5f4b]/30 bg-[#2c5f4b]/5 text-[#2c5f4b]"
+                  ? "border-rust/30 bg-rust/5 text-rust"
+                  : "border-ash/30 bg-ash/5 text-bone/70"
               }`}
             >
-              Status: {message.text}
+              {message.text}
             </div>
           )}
         </div>
-        <div className="flex gap-3 font-mono text-xs self-end md:self-auto">
-          <button
-            onClick={handleLogout}
-            disabled={loading}
-            className="px-4 py-2 border border-[#1a1a1a] bg-transparent text-[#c02b2b] hover:bg-[#c02b2b] hover:text-[#fafafa] transition-all cursor-pointer disabled:opacity-50 shadow-brutal"
-          >
-            [Log Out]
-          </button>
-        </div>
+        <button
+          onClick={handleLogout}
+          disabled={loading}
+          className="btn-secondary px-4 py-2 font-mono text-xs disabled:opacity-50"
+        >
+          Log Out
+        </button>
       </div>
 
-      {/* 2. Navigation Tabs */}
+      {/* Tabs */}
       <div className="space-y-6">
-        <div className="flex border-b border-[#1a1a1a] font-mono text-sm">
+        <div className="flex border-b border-ash/30 font-mono text-sm">
           <button
             onClick={() => {
               setActiveTab("projects");
               setMessage(null);
             }}
-            className={`px-4 py-2 border-t border-x border-[#1a1a1a] translate-y-[1px] ${
+            className={`px-4 py-2 border-b-2 transition-colors ${
               activeTab === "projects"
-                ? "bg-[#fafafa] font-bold border-b-[#fafafa]"
-                : "bg-[#1a1a1a]/5 border-b-[#1a1a1a] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all"
+                ? "border-rust text-bone font-bold"
+                : "border-transparent text-ash hover:text-bone"
             }`}
           >
-            [Projects]
+            Projects
           </button>
           <button
             onClick={() => {
               setActiveTab("blog");
               setMessage(null);
             }}
-            className={`px-4 py-2 border-t border-x border-[#1a1a1a] translate-y-[1px] ${
+            className={`px-4 py-2 border-b-2 transition-colors ${
               activeTab === "blog"
-                ? "bg-[#fafafa] font-bold border-b-[#fafafa]"
-                : "bg-[#1a1a1a]/5 border-b-[#1a1a1a] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all"
+                ? "border-rust text-bone font-bold"
+                : "border-transparent text-ash hover:text-bone"
             }`}
           >
-            [Blog Posts]
+            Blog Posts
           </button>
         </div>
 
-        {/* PROJECTS TAB CONTENTS */}
+        {/* Projects Tab */}
         {activeTab === "projects" && (
-          <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-6">
-            <div className="flex justify-between items-center border-b border-[#1a1a1a]/10 pb-3">
-              <h2 className="text-lg font-bold font-mono uppercase text-[#1a1a1a]">
-                [Projects List]
+          <Card>
+            <div className="flex justify-between items-center border-b border-ash/15 pb-3 mb-4">
+              <h2 className="text-lg font-mono font-bold text-bone">
+                Projects
               </h2>
               <Link
                 href="/admin/projects/new"
-                className="px-3 py-1.5 border border-[#1a1a1a] bg-[#2c5f4b] text-[#fafafa] font-mono text-xs font-bold hover:bg-[#1a1a1a] transition-all shadow-brutal"
+                className="btn-primary px-3 py-1.5 font-mono text-xs"
               >
                 + Add Project
               </Link>
             </div>
-
             {initialProjects.length === 0 ? (
-              <div className="border border-dashed border-[#1a1a1a]/20 p-8 text-center bg-[#1a1a1a]/5 font-mono text-sm text-[#1a1a1a]/60">
-                No projects found. Use the button above to publish your first project.
+              <div className="border border-dashed border-ash/20 p-8 text-center bg-void font-mono text-sm text-ash">
+                No projects found. Use the button above to publish your first
+                project.
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left font-mono text-xs border-collapse">
                   <thead>
-                    <tr className="border-b border-[#1a1a1a]">
-                      <th className="pb-2 font-bold uppercase tracking-wider">Title</th>
-                      <th className="pb-2 font-bold uppercase tracking-wider hidden md:table-cell">Tech Stack</th>
-                      <th className="pb-2 font-bold uppercase tracking-wider hidden sm:table-cell">Last Updated</th>
-                      <th className="pb-2 font-bold uppercase tracking-wider text-right">Actions</th>
+                    <tr className="border-b border-ash/30">
+                      <th className="pb-2 font-bold uppercase tracking-wider text-bone/60">
+                        Title
+                      </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider hidden md:table-cell text-bone/60">
+                        Tech Stack
+                      </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider hidden sm:table-cell text-bone/60">
+                        Last Updated
+                      </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider text-right text-bone/60">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#1a1a1a]/10">
+                  <tbody className="divide-y divide-ash/10">
                     {initialProjects.map((project) => (
-                      <tr key={project.id} className="hover:bg-[#1a1a1a]/5 transition-colors">
-                        <td className="py-3 pr-2 font-bold font-sans text-sm text-[#1a1a1a]">
+                      <tr
+                        key={project.id}
+                        className="hover:bg-bone/5 transition-colors"
+                      >
+                        <td className="py-3 pr-2 font-sans text-sm text-bone">
                           {project.title}
                         </td>
-                        <td className="py-3 pr-2 hidden md:table-cell max-w-xs truncate">
+                        <td className="py-3 pr-2 hidden md:table-cell max-w-xs truncate text-bone/50">
                           {project.techStack || "-"}
                         </td>
-                        <td className="py-3 pr-2 hidden sm:table-cell text-[#1a1a1a]/60">
+                        <td className="py-3 pr-2 hidden sm:table-cell text-bone/50">
                           {new Date(project.updatedAt).toLocaleDateString()}
                         </td>
                         <td className="py-3 text-right space-x-2">
                           <Link
                             href={`/admin/projects/${project.id}`}
-                            className="px-2.5 py-1 border border-[#1a1a1a]/30 hover:border-[#1a1a1a] text-[#2c5f4b] hover:bg-[#2c5f4b]/5 transition-all inline-block"
+                            className="text-rust hover:underline"
                           >
-                            [Edit]
+                            Edit
                           </Link>
                           <button
-                            onClick={() => handleProjectDelete(project.id, project.title)}
+                            onClick={() =>
+                              handleProjectDelete(project.id, project.title)
+                            }
                             disabled={loading}
-                            className="px-2.5 py-1 border border-[#1a1a1a]/30 hover:border-[#1a1a1a] text-[#c02b2b] hover:bg-[#c02b2b]/5 transition-all cursor-pointer disabled:opacity-50"
+                            className="text-bone/40 hover:text-rust transition-colors cursor-pointer disabled:opacity-50"
                           >
-                            [Delete]
+                            Delete
                           </button>
                         </td>
                       </tr>
@@ -301,64 +318,77 @@ export default function AdminDashboardClient({
                 </table>
               </div>
             )}
-          </div>
+          </Card>
         )}
 
-        {/* BLOG POSTS TAB CONTENTS */}
+        {/* Blog Tab */}
         {activeTab === "blog" && (
-          <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-6">
-            <div className="flex justify-between items-center border-b border-[#1a1a1a]/10 pb-3">
-              <h2 className="text-lg font-bold font-mono uppercase text-[#1a1a1a]">
-                [Blog Posts List]
+          <Card>
+            <div className="flex justify-between items-center border-b border-ash/15 pb-3 mb-4">
+              <h2 className="text-lg font-mono font-bold text-bone">
+                Blog Posts
               </h2>
               <Link
                 href="/admin/blog/new"
-                className="px-3 py-1.5 border border-[#1a1a1a] bg-[#2c5f4b] text-[#fafafa] font-mono text-xs font-bold hover:bg-[#1a1a1a] transition-all shadow-brutal"
+                className="btn-primary px-3 py-1.5 font-mono text-xs"
               >
                 + Add Blog Post
               </Link>
             </div>
-
             {initialPosts.length === 0 ? (
-              <div className="border border-dashed border-[#1a1a1a]/20 p-8 text-center bg-[#1a1a1a]/5 font-mono text-sm text-[#1a1a1a]/60">
-                No blog posts found. Use the button above to write your first post.
+              <div className="border border-dashed border-ash/20 p-8 text-center bg-void font-mono text-sm text-ash">
+                No blog posts found. Use the button above to write your first
+                post.
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left font-mono text-xs border-collapse">
                   <thead>
-                    <tr className="border-b border-[#1a1a1a]">
-                      <th className="pb-2 font-bold uppercase tracking-wider">Title</th>
-                      <th className="pb-2 font-bold uppercase tracking-wider hidden md:table-cell">Slug</th>
-                      <th className="pb-2 font-bold uppercase tracking-wider hidden sm:table-cell">Published Date</th>
-                      <th className="pb-2 font-bold uppercase tracking-wider text-right">Actions</th>
+                    <tr className="border-b border-ash/30">
+                      <th className="pb-2 font-bold uppercase tracking-wider text-bone/60">
+                        Title
+                      </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider hidden md:table-cell text-bone/60">
+                        Slug
+                      </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider hidden sm:table-cell text-bone/60">
+                        Published Date
+                      </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider text-right text-bone/60">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#1a1a1a]/10">
+                  <tbody className="divide-y divide-ash/10">
                     {initialPosts.map((post) => (
-                      <tr key={post.id} className="hover:bg-[#1a1a1a]/5 transition-colors">
-                        <td className="py-3 pr-2 font-bold font-sans text-sm text-[#1a1a1a]">
+                      <tr
+                        key={post.id}
+                        className="hover:bg-bone/5 transition-colors"
+                      >
+                        <td className="py-3 pr-2 font-sans text-sm text-bone">
                           {post.title}
                         </td>
-                        <td className="py-3 pr-2 hidden md:table-cell text-[#1a1a1a]/60">
+                        <td className="py-3 pr-2 hidden md:table-cell text-bone/50">
                           {post.slug}
                         </td>
-                        <td className="py-3 pr-2 hidden sm:table-cell text-[#1a1a1a]/60">
+                        <td className="py-3 pr-2 hidden sm:table-cell text-bone/50">
                           {new Date(post.publishedAt).toLocaleDateString()}
                         </td>
                         <td className="py-3 text-right space-x-2">
                           <Link
                             href={`/admin/blog/${post.id}`}
-                            className="px-2.5 py-1 border border-[#1a1a1a]/30 hover:border-[#1a1a1a] text-[#2c5f4b] hover:bg-[#2c5f4b]/5 transition-all inline-block"
+                            className="text-rust hover:underline"
                           >
-                            [Edit]
+                            Edit
                           </Link>
                           <button
-                            onClick={() => handlePostDelete(post.id, post.title)}
+                            onClick={() =>
+                              handlePostDelete(post.id, post.title)
+                            }
                             disabled={loading}
-                            className="px-2.5 py-1 border border-[#1a1a1a]/30 hover:border-[#1a1a1a] text-[#c02b2b] hover:bg-[#c02b2b]/5 transition-all cursor-pointer disabled:opacity-50"
+                            className="text-bone/40 hover:text-rust transition-colors cursor-pointer disabled:opacity-50"
                           >
-                            [Delete]
+                            Delete
                           </button>
                         </td>
                       </tr>
@@ -367,7 +397,7 @@ export default function AdminDashboardClient({
                 </table>
               </div>
             )}
-          </div>
+          </Card>
         )}
       </div>
     </div>

@@ -2,8 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import prisma from "@/lib/db";
 import { Project } from "@prisma/client";
+import Card from "@/components/Card";
+import Tag from "@/components/Tag";
+import Button from "@/components/Button";
+import AnimatedSection from "@/components/AnimatedSection";
 
-export const revalidate = 0; // Dynamic server component
+export const revalidate = 0;
 
 async function getFeaturedProjects(): Promise<Project[]> {
   try {
@@ -20,176 +24,186 @@ async function getFeaturedProjects(): Promise<Project[]> {
 export default async function Home() {
   const featuredProjects = await getFeaturedProjects();
 
-  const skills = [
-    "Python",
-    "React",
-    "TypeScript",
-    "Arch Linux",
-    "Java",
-    "Machine Learning",
-    "MNE-Python",
-    "Next.js",
-    "Prisma ORM",
-    "SQLite",
-    "Tailwind CSS",
-    "Git",
-    "BCI (Brain-Computer Interfaces)",
-    "Software Analysis & Testing",
+  const skillCategories = [
+    {
+      category: "Frontend & Web",
+      skills: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Framer Motion", "JavaScript"],
+    },
+    {
+      category: "Backend & Databases",
+      skills: ["Python", "Java", "Node.js", "PostgreSQL", "Prisma ORM", "Docker"],
+    },
+    {
+      category: "QA & Systems Engineering",
+      skills: ["Test Automation", "CI/CD", "Linux", "System Architecture", "Quality Assurance"],
+    },
   ];
 
   return (
-    <div className="space-y-12">
-      {/* 1. Hero & Academic Identity */}
-      <section className="border-brutal bg-[#fafafa] p-6 sm:p-8 shadow-brutal flex flex-col md:flex-row gap-8 items-start relative overflow-hidden">
-        {/* Academic Accent Ribbon */}
-        <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
-        
-        <div className="flex-1 space-y-4 pl-2">
-          <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ SOFTWARE ENGINEERING PORTFOLIO ]
+    <div className="space-y-20">
+      {/* Hero Section */}
+      <AnimatedSection delay={0.1} className="space-y-6 pt-10">
+        <div className="flex items-center gap-3">
+          <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-mono font-medium rounded-full">
+            SOFTWARE ENGINEER
           </span>
-          <h1 className="text-3xl sm:text-4xl font-bold font-mono tracking-tight leading-tight">
-            Cristhian Victor Rojas Marquez
-          </h1>
-          <p className="font-mono text-sm text-[#1a1a1a]/60">
-            Software Engineering & Web Development
-          </p>
-          
-          <div className="prose prose-zinc max-w-none text-[#1a1a1a] font-sans leading-relaxed text-sm sm:text-base space-y-4">
-            <p>
-              Welcome to my professional development space. I am a software engineer focused on building robust web systems, test automation engines, and reliable real-time signal classification applications.
-            </p>
-            <p>
-              My primary expertise and development areas include <strong>Software Analysis & Testing</strong>, <strong>Neurotechnology Applications (BCI Pipelines)</strong>, and <strong>Modern Web Development</strong>.
-            </p>
+          <span className="font-mono text-xs text-neutral-500">• Cochabamba, Bolivia</span>
+        </div>
+        
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-sans font-bold tracking-tight text-neutral-900 leading-tight">
+          Cristhian Victor<br />Rojas Marquez
+        </h1>
+
+        <p className="text-lg sm:text-xl font-sans text-neutral-600 max-w-2xl leading-relaxed">
+          Full-stack software engineer specialized in building robust web applications, test automation engines, and scalable system architectures. I love crafting clean code and fluid user experiences.
+        </p>
+
+        <div className="flex flex-wrap gap-4 pt-4">
+          <Button href="/resume" variant="primary">View Resume</Button>
+          <Button href="/projects" variant="secondary">
+            Explore Projects
+          </Button>
+        </div>
+      </AnimatedSection>
+
+      {/* HR Recruiter Quick Snapshot Card */}
+      <AnimatedSection delay={0.2}>
+        <div className="bg-white border border-neutral-200 rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+          <div className="flex flex-wrap justify-between items-center gap-3 border-b border-neutral-100 pb-4">
+            <h2 className="font-sans text-lg font-semibold text-neutral-900">
+              Recruiter Overview
+            </h2>
+            <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-mono font-medium rounded-full">
+              Available Immediately
+            </span>
           </div>
 
-          <div className="pt-2 flex flex-wrap gap-3 font-mono text-sm">
-            <Link
-              href="/projects"
-              className="px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] hover:bg-[#1a1a1a] hover:text-[#fafafa] transition-all"
-            >
-              [View Projects]
-            </Link>
-            <a
-              href="mailto:cristhian.rojas@example.com"
-              className="px-4 py-2 border border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] transition-all"
-            >
-              [Contact Me]
-            </a>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 font-mono text-sm">
+            <div className="space-y-1.5 border-l-2 border-blue-600 pl-4">
+              <span className="text-neutral-500 font-medium uppercase text-xs tracking-wider block">
+                Target Roles
+              </span>
+              <p className="font-semibold text-neutral-900">
+                Full-Stack / QA Engineer
+              </p>
+            </div>
+
+            <div className="space-y-1.5 border-l-2 border-neutral-200 pl-4">
+              <span className="text-neutral-500 font-medium uppercase text-xs tracking-wider block">
+                Education
+              </span>
+              <p className="font-semibold text-neutral-900">
+                B.S. Computer Science
+              </p>
+              <p className="text-neutral-500 text-xs">
+                UMSS
+              </p>
+            </div>
+
+            <div className="space-y-1.5 border-l-2 border-neutral-200 pl-4">
+              <span className="text-neutral-500 font-medium uppercase text-xs tracking-wider block">
+                Location
+              </span>
+              <p className="font-semibold text-neutral-900">
+                Cochabamba, BO
+              </p>
+              <p className="text-blue-600 font-medium text-xs">
+                Open to Remote
+              </p>
+            </div>
+
+            <div className="space-y-1.5 border-l-2 border-neutral-200 pl-4">
+              <span className="text-neutral-500 font-medium uppercase text-xs tracking-wider block">
+                Contact
+              </span>
+              <p className="font-semibold text-neutral-900">
+                Spanish / English
+              </p>
+              <a href="mailto:cristhian.rojas@example.com" className="text-blue-600 hover:underline text-xs">
+                Email Me
+              </a>
+            </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
-      {/* 2. Skills and Neurotech Illustration Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-        {/* Skills List Section */}
-        <section className="md:col-span-7 border-brutal bg-[#fafafa] p-6 shadow-brutal relative">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#2c5f4b]" />
-          <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 mb-4 flex items-center gap-2">
-            <span className="text-[#2c5f4b]">■</span> Technical Skills
+      {/* Categorized Technical Skills */}
+      <AnimatedSection delay={0.3} className="space-y-8">
+        <div>
+          <h2 className="text-3xl font-sans font-bold text-neutral-900">
+            Technical Stack
           </h2>
-          <p className="text-xs font-mono text-[#1a1a1a]/60 mb-4">
-            Core technologies, programming languages, and software frameworks:
+          <p className="text-sm font-sans text-neutral-500 mt-2">
+            Core technologies I work with
           </p>
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                className="px-2.5 py-1 text-xs font-mono border border-[#1a1a1a]/10 hover:border-[#1a1a1a] bg-[#fafafa] text-[#1a1a1a] transition-all"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
+        </div>
 
-        {/* Neurotechnology / BCI Focus Illustration */}
-        <section className="md:col-span-5 border-brutal bg-[#fafafa] p-6 shadow-brutal flex flex-col justify-between">
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-2 flex items-center gap-2">
-              <span className="text-[#c02b2b]">■</span> Neurotech Applications
-            </h2>
-            <div className="border border-[#1a1a1a]/10 bg-white p-2">
-              <Image
-                src="/bci_abstract.png"
-                alt="BCI and Brain Wave Signals Abstract Illustration"
-                width={400}
-                height={400}
-                className="w-full h-auto grayscale contrast-125 object-cover"
-                priority
-              />
-            </div>
-            <p className="text-xs font-mono text-[#1a1a1a]/70 leading-relaxed">
-              Development of real-time electroencephalography (EEG) data processing pipelines (MNE-Python, PyTorch) and building responsive web dashboards for live neurofeedback visualization.
-            </p>
-          </div>
-        </section>
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {skillCategories.map((group, index) => (
+            <Card key={group.category} delay={0.1 * index} className="space-y-4">
+              <h3 className="font-sans font-semibold text-neutral-900">
+                {group.category}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <Tag key={skill}>{skill}</Tag>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </AnimatedSection>
 
-      {/* 3. Featured Projects from DB */}
-      <section className="border-brutal bg-[#fafafa] p-6 sm:p-8 shadow-brutal">
-        <div className="flex justify-between items-center border-b border-[#1a1a1a]/10 pb-3 mb-6">
-          <h2 className="text-xl font-bold font-mono flex items-center gap-2">
-            <span className="text-[#c02b2b]">■</span> Featured Projects
+      {/* Featured Projects */}
+      <AnimatedSection delay={0.4} className="space-y-8">
+        <div className="flex justify-between items-end border-b border-neutral-200 pb-4">
+          <h2 className="text-3xl font-sans font-bold text-neutral-900">
+            Featured Projects
           </h2>
           <Link
             href="/projects"
-            className="text-xs font-mono text-[#c02b2b] hover:underline"
+            className="font-mono text-sm text-blue-600 font-medium hover:underline"
           >
-            [View All &rarr;]
+            View All &rarr;
           </Link>
         </div>
 
         {featuredProjects.length === 0 ? (
-          <div className="border border-dashed border-[#1a1a1a]/20 p-8 text-center bg-[#1a1a1a]/5">
-            <p className="font-mono text-sm text-[#1a1a1a]/60">
-              No projects have been published yet.
+          <Card className="p-12 text-center border border-dashed border-neutral-300 shadow-none hover:shadow-none">
+            <p className="font-sans text-neutral-500">
+              No projects published yet.
             </p>
-            <p className="font-mono text-xs text-[#1a1a1a]/40 mt-2">
-              Please check back later or visit the <Link href="/admin" className="text-[#c02b2b] underline">Admin Panel</Link> to add data.
-            </p>
-          </div>
+          </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="border-brutal-muted p-4 flex flex-col justify-between hover:border-[#1a1a1a] hover:bg-[#1a1a1a]/5 transition-all bg-white"
-              >
+            {featuredProjects.map((project, index) => (
+              <Card key={project.id} delay={0.1 * index} className="flex flex-col justify-between">
                 <div className="space-y-3">
-                  <h3 className="font-mono font-bold text-base hover:text-[#c02b2b] transition-colors">
+                  <h3 className="font-sans font-bold text-lg text-neutral-900 hover:text-blue-600 transition-colors">
                     <Link href={`/projects/${project.id}`}>
                       {project.title}
                     </Link>
                   </h3>
-                  <p className="text-xs text-[#1a1a1a]/80 font-sans line-clamp-3">
+                  <p className="text-sm text-neutral-600 font-sans line-clamp-3 leading-relaxed">
                     {project.description}
                   </p>
-                  
                   {project.techStack && (
-                    <div className="flex flex-wrap gap-1 pt-1">
+                    <div className="flex flex-wrap gap-2 pt-2">
                       {project.techStack.split(",").map((tech) => (
-                        <span
-                          key={tech.trim()}
-                          className="px-1.5 py-0.5 text-[10px] font-mono bg-[#2c5f4b]/10 text-[#2c5f4b] border border-[#2c5f4b]/20"
-                        >
-                          {tech.trim()}
-                        </span>
+                        <Tag key={tech.trim()}>{tech.trim()}</Tag>
                       ))}
                     </div>
                   )}
                 </div>
-
-                <div className="flex gap-3 pt-4 border-t border-[#1a1a1a]/5 mt-4 font-mono text-[11px]">
+                <div className="flex gap-4 pt-6 mt-4 font-mono text-xs">
                   {project.repoUrl && (
                     <a
                       href={project.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#c02b2b] hover:underline"
+                      className="text-blue-600 font-medium hover:underline"
                     >
-                      [GitHub]
+                      GitHub
                     </a>
                   )}
                   {project.liveUrl && (
@@ -197,17 +211,18 @@ export default async function Home() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#2c5f4b] hover:underline"
+                      className="text-neutral-600 hover:text-neutral-900 hover:underline"
                     >
-                      [Live Demo]
+                      Live Demo
                     </a>
                   )}
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         )}
-      </section>
+      </AnimatedSection>
     </div>
   );
 }
+

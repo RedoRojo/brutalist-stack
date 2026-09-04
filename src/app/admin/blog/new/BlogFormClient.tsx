@@ -43,35 +43,42 @@ export default function BlogFormClient() {
         router.refresh();
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred while creating the post.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "An error occurred while creating the post."
+      );
       setLoading(false);
     }
   }
 
   return (
-    <div className="border-brutal bg-[#fafafa] p-6 shadow-brutal space-y-6">
-      <div className="border-b border-[#1a1a1a]/10 pb-3 flex justify-between items-center">
-        <h2 className="text-lg font-bold font-mono uppercase text-[#1a1a1a]">
-          [ Blog Post Form ]
+    <div className="bg-grit border border-ash/40 p-6 space-y-6">
+      <div className="border-b border-ash/15 pb-3 flex justify-between items-center">
+        <h2 className="text-lg font-mono font-bold text-bone">
+          New Blog Post
         </h2>
         <Link
           href="/admin"
-          className="text-xs font-mono text-[#c02b2b] hover:underline"
+          className="text-xs font-mono text-rust hover:underline"
         >
-          [Back to Dashboard]
+          Back to Dashboard
         </Link>
       </div>
 
       {error && (
-        <div className="border border-[#c02b2b]/30 bg-[#c02b2b]/5 p-3 text-xs font-mono text-[#c02b2b]">
-          Error: {error}
+        <div className="border border-rust/30 bg-rust/5 p-3 text-xs font-mono text-rust">
+          {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
         <div className="space-y-1">
-          <label htmlFor="b-title" className="font-bold uppercase tracking-wider block">
-            Post Title:
+          <label
+            htmlFor="b-title"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Post Title
           </label>
           <input
             id="b-title"
@@ -81,13 +88,16 @@ export default function BlogFormClient() {
             onChange={(e) => handleTitleChange(e.target.value)}
             disabled={loading}
             placeholder="e.g. Building Resilient Database Systems"
-            className="w-full px-3 py-2 border border-[#1a1a1a] bg-white rounded-none focus:outline-none focus:ring-1 focus:ring-[#c02b2b] text-sm font-sans"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
           />
         </div>
 
         <div className="space-y-1">
-          <label htmlFor="b-slug" className="font-bold uppercase tracking-wider block">
-            Slug (URL path):
+          <label
+            htmlFor="b-slug"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Slug (URL path)
           </label>
           <input
             id="b-slug"
@@ -97,13 +107,16 @@ export default function BlogFormClient() {
             onChange={(e) => setSlug(e.target.value)}
             disabled={loading}
             placeholder="building-resilient-database-systems"
-            className="w-full px-3 py-2 border border-[#1a1a1a] bg-white rounded-none focus:outline-none focus:ring-1 focus:ring-[#c02b2b] text-sm font-sans"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
           />
         </div>
 
         <div className="space-y-1">
-          <label htmlFor="b-summary" className="font-bold uppercase tracking-wider block">
-            Summary (Short Intro):
+          <label
+            htmlFor="b-summary"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Summary
           </label>
           <textarea
             id="b-summary"
@@ -113,13 +126,16 @@ export default function BlogFormClient() {
             onChange={(e) => setSummary(e.target.value)}
             disabled={loading}
             placeholder="A short snippet that appears in lists."
-            className="w-full px-3 py-2 border border-[#1a1a1a] bg-white rounded-none focus:outline-none focus:ring-1 focus:ring-[#c02b2b] text-sm font-sans"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
           />
         </div>
 
         <div className="space-y-1">
-          <label htmlFor="b-content" className="font-bold uppercase tracking-wider block">
-            Post Body (Markdown):
+          <label
+            htmlFor="b-content"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Post Body (Markdown)
           </label>
           <textarea
             id="b-content"
@@ -128,17 +144,17 @@ export default function BlogFormClient() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             disabled={loading}
-            placeholder="# Introduction...&#10;&#10;Write the content of your article in Markdown here."
-            className="w-full px-3 py-2 border border-[#1a1a1a] bg-white rounded-none focus:outline-none focus:ring-1 focus:ring-[#c02b2b] text-xs font-mono"
+            placeholder="# Introduction...&#10;&#10;Write your article in Markdown."
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-xs font-mono text-bone"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-bold uppercase tracking-wide hover:bg-[#1a1a1a] transition-all cursor-pointer shadow-brutal disabled:opacity-50"
+          className="w-full btn-primary px-4 py-2 font-bold uppercase tracking-wide disabled:opacity-50"
         >
-          {loading ? "[Saving Post...]" : "[Save Blog Post]"}
+          {loading ? "Saving..." : "Save Blog Post"}
         </button>
       </form>
     </div>

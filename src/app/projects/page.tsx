@@ -1,8 +1,12 @@
 import prisma from "@/lib/db";
 import { Project } from "@prisma/client";
 import Link from "next/link";
+import Card from "@/components/Card";
+import Tag from "@/components/Tag";
+import Button from "@/components/Button";
+import Badge from "@/components/Badge";
 
-export const revalidate = 0; // Dynamic server component
+export const revalidate = 0;
 
 async function getAllProjects(): Promise<Project[]> {
   try {
@@ -19,86 +23,65 @@ export default async function ProjectsPage() {
   const projects = await getAllProjects();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Page Header */}
-      <section className="border-brutal bg-[#fafafa] p-6 shadow-brutal relative">
-        <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
-        <div className="space-y-2 pl-2">
-          <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ Projects & Portfolio ]
-          </span>
-          <h1 className="text-3xl font-bold font-mono tracking-tight">
-            PROJECTS & CONTRIBUTIONS
-          </h1>
-          <p className="text-sm font-mono text-[#1a1a1a]/60">
-            A comprehensive list of software engineering projects, open-source repositories, and technical contributions.
-          </p>
+      <section className="accent-bar pl-6 space-y-3">
+        <div className="flex items-center gap-2">
+          <Badge variant="red">ENGINEERING PORTFOLIO</Badge>
         </div>
+        <h1 className="text-3xl md:text-4xl font-display font-normal tracking-tight text-neutral-900">
+          Projects &amp; Open Source Contributions
+        </h1>
+        <p className="text-sm font-sans text-neutral-600 max-w-2xl leading-relaxed">
+          A comprehensive showcase of full-stack web applications, automated testing tools, and real-time signal classification repositories.
+        </p>
       </section>
 
-      {/* Projects List/Grid */}
+      {/* Projects Grid */}
       {projects.length === 0 ? (
-        <div className="border-brutal bg-[#fafafa] p-12 text-center shadow-brutal space-y-4">
-          <p className="font-mono text-sm text-[#1a1a1a]/60">
-            No projects have been published yet.
+        <Card className="p-12 text-center">
+          <p className="font-mono text-sm text-neutral-500">
+            No projects published yet in database.
           </p>
-          <div className="flex justify-center">
-            <Link
-              href="/admin"
-              className="px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-mono text-xs hover:bg-[#1a1a1a] transition-all shadow-brutal"
-            >
-              [Admin Dashboard &rarr;]
-            </Link>
+          <div className="mt-4">
+            <Button href="/admin">Admin Dashboard</Button>
           </div>
-        </div>
+        </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
-            <article
-              key={project.id}
-              className="border-brutal bg-white p-6 shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-red transition-all flex flex-col justify-between"
-            >
+            <Card key={project.id} className="flex flex-col justify-between hover:border-crimson transition-all">
               <div className="space-y-4">
-                <div className="border-b border-[#1a1a1a]/10 pb-2">
-                  <h2 className="font-mono font-bold text-lg hover:text-[#c02b2b] transition-colors">
-                    <Link href={`/projects/${project.id}`}>
-                      {project.title}
-                    </Link>
-                  </h2>
-                </div>
-                
-                <p className="text-sm font-sans leading-relaxed text-[#1a1a1a]/85 min-h-[4rem]">
+                <h2 className="font-mono font-bold text-base text-neutral-900 hover:text-crimson transition-colors">
+                  <Link href={`/projects/${project.id}`}>
+                    {project.title}
+                  </Link>
+                </h2>
+                <p className="text-sm font-sans leading-relaxed text-neutral-600 min-h-[4rem]">
                   {project.description}
                 </p>
-
                 {project.techStack && (
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-mono text-[#1a1a1a]/50 uppercase tracking-wider block">
-                      Tech Stack:
+                    <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">
+                      Tech Stack
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {project.techStack.split(",").map((tech) => (
-                        <span
-                          key={tech.trim()}
-                          className="px-2 py-0.5 text-xs font-mono bg-[#2c5f4b]/10 text-[#2c5f4b] border border-[#2c5f4b]/20"
-                        >
-                          {tech.trim()}
-                        </span>
+                        <Tag key={tech.trim()}>{tech.trim()}</Tag>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-
-              <div className="flex gap-4 pt-4 mt-6 border-t border-[#1a1a1a]/10 font-mono text-xs">
+              <div className="flex gap-4 pt-4 mt-6 border-t border-dotted border-neutral-200 font-mono text-xs">
                 {project.repoUrl && (
                   <a
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#c02b2b] font-bold hover:underline flex items-center gap-1"
+                    className="text-crimson font-medium hover:underline"
                   >
-                    [Source Repository]
+                    Source Code (GitHub)
                   </a>
                 )}
                 {project.liveUrl && (
@@ -106,16 +89,17 @@ export default async function ProjectsPage() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#2c5f4b] font-bold hover:underline flex items-center gap-1"
+                    className="text-neutral-600 hover:text-neutral-900 hover:underline"
                   >
-                    [Live Deployment]
+                    Live Demo &rarr;
                   </a>
                 )}
               </div>
-            </article>
+            </Card>
           ))}
         </div>
       )}
     </div>
   );
 }
+

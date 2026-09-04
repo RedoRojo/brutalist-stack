@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getPostBySlug } from "../../admin/actions";
 import Markdown from "@/components/Markdown";
+import Card from "@/components/Card";
+import Badge from "@/components/Badge";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 0; // Dynamic server component
+export const revalidate = 0;
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
@@ -21,46 +23,38 @@ export default async function BlogPostPage({ params }: PageProps) {
     <div className="space-y-8 max-w-3xl mx-auto">
       {/* Back link */}
       <div className="font-mono text-xs">
-        <Link href="/blog" className="text-[#c02b2b] hover:underline">
-          [&larr; Back to Blog]
+        <Link href="/blog" className="text-rust link-underline">
+          &larr; Back to Blog
         </Link>
       </div>
 
-      {/* Main Post Header Card */}
-      <article className="border-brutal bg-[#fafafa] p-6 sm:p-8 shadow-brutal space-y-4 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
-
-        <div className="pl-3 space-y-3">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs text-[#1a1a1a]/40 bg-[#1a1a1a]/5 px-2 py-0.5 border border-[#1a1a1a]/10">
-              PUBLISHED: {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
-          </div>
-
-          <h1 className="text-2xl sm:text-3xl font-bold font-mono tracking-tight leading-snug uppercase border-b border-[#1a1a1a]/10 pb-3">
+      {/* Post Header */}
+      <Card accent>
+        <div className="space-y-4">
+          <Badge>
+            PUBLISHED{" "}
+            {new Date(post.publishedAt).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </Badge>
+          <h1 className="text-2xl sm:text-3xl font-display font-normal tracking-tight leading-snug text-bone">
             {post.title}
           </h1>
-
-          <p className="text-sm font-sans italic text-[#1a1a1a]/70 border-l-2 border-[#2c5f4b] pl-4 leading-relaxed">
+          <p className="text-sm font-sans text-bone/60 border-l-2 border-rust/40 pl-4 leading-relaxed italic">
             {post.summary}
           </p>
         </div>
-      </article>
+      </Card>
 
-      {/* Main Markdown Body Content */}
-      <section className="border-brutal bg-white p-6 sm:p-8 shadow-brutal space-y-4">
-        <div className="font-mono text-xs text-[#1a1a1a]/50 border-b border-[#1a1a1a]/10 pb-2 mb-4 uppercase">
+      {/* Post Content */}
+      <Card>
+        <div className="font-mono text-[10px] text-ash uppercase tracking-wider border-b border-ash/15 pb-2 mb-4">
           Journal Entry
         </div>
-        
-        <div className="prose prose-zinc max-w-none">
-          <Markdown content={post.content} />
-        </div>
-      </section>
+        <Markdown content={post.content} />
+      </Card>
     </div>
   );
 }

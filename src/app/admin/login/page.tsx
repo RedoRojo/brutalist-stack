@@ -31,20 +31,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto my-12 border-brutal bg-[#fafafa] p-8 shadow-brutal space-y-6">
-      <div className="space-y-2 border-b border-[#1a1a1a]/10 pb-4">
-        <h1 className="text-xl font-bold font-mono uppercase tracking-tight flex items-center gap-2">
-          <span className="text-[#c02b2b]">■</span> Access Restricted
+    <div className="max-w-md mx-auto my-12 bg-grit border border-ash/40 p-8 space-y-6">
+      <div className="space-y-2 border-b border-ash/15 pb-4">
+        <h1 className="text-xl font-display font-normal text-bone">
+          Access Restricted
         </h1>
-        <p className="text-xs font-mono text-[#1a1a1a]/60">
+        <p className="text-xs font-mono text-ash">
           Administrator credentials required.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 font-mono">
         <div className="space-y-2">
-          <label htmlFor="pass" className="text-xs font-bold uppercase tracking-wider block">
-            Enter admin password:
+          <label
+            htmlFor="pass"
+            className="text-xs font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Password
           </label>
           <input
             id="pass"
@@ -53,22 +56,22 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
             required
-            className="w-full px-3 py-2 border border-[#1a1a1a] bg-white rounded-none focus:outline-none focus:ring-1 focus:ring-[#c02b2b] text-sm"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone"
           />
         </div>
 
         {error && (
-          <div className="border border-[#c02b2b]/30 bg-[#c02b2b]/5 p-3 text-xs text-[#c02b2b] font-mono">
-            Error: {error}
+          <div className="border border-rust/30 bg-rust/5 p-3 text-xs text-rust font-mono">
+            {error}
           </div>
         )}
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-4 py-2 border border-[#1a1a1a] bg-[#c02b2b] text-[#fafafa] font-bold text-sm tracking-wide uppercase hover:bg-[#1a1a1a] transition-all cursor-pointer shadow-brutal disabled:opacity-50"
+          className="w-full btn-primary px-4 py-2 font-bold text-sm tracking-wide uppercase disabled:opacity-50"
         >
-          {loading ? "[Logging in...]" : "[Sign In]"}
+          {loading ? "Signing in..." : "Sign In"}
         </button>
       </form>
     </div>

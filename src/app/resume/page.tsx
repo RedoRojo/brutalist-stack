@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Button from "@/components/Button";
+import AnimatedSection from "@/components/AnimatedSection";
 
 export default function ResumePage() {
   function handlePrint() {
@@ -8,157 +10,165 @@ export default function ResumePage() {
   }
 
   return (
-    <div className="space-y-8 max-w-3xl mx-auto print:max-w-none print:px-0">
-      {/* Print Action / Document Header info */}
-      <div className="flex justify-between items-center font-mono text-xs print:hidden">
-        <span>[ Resume ]</span>
-        <button
-          onClick={handlePrint}
-          className="px-3 py-1.5 border border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] transition-all cursor-pointer shadow-brutal active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1a1a1a]"
-        >
-          [Print Resume]
-        </button>
-      </div>
+    <div className="space-y-12 max-w-4xl mx-auto print:max-w-none print:px-0">
+      {/* Print Action & Quick Info Header */}
+      <AnimatedSection delay={0.1} className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-sm print-hidden bg-white p-5 rounded-2xl border border-neutral-100 shadow-sm">
+        <div className="flex items-center gap-3">
+          <span className="px-3 py-1 bg-neutral-100 text-neutral-800 text-xs font-mono font-medium rounded-md">
+            CURRICULUM VITAE
+          </span>
+          <span className="text-neutral-500 text-xs">• PDF Ready</span>
+        </div>
+        <Button onClick={handlePrint} variant="primary">
+          Print / Download PDF
+        </Button>
+      </AnimatedSection>
 
-      {/* Main Resume Container */}
-      <article className="border-brutal bg-[#fafafa] p-6 sm:p-10 shadow-brutal space-y-8 print:border-none print:shadow-none print:bg-transparent print:p-0">
-        {/* Header section */}
-        <section className="text-center space-y-3 border-b border-[#1a1a1a] pb-6">
-          <h1 className="text-3xl font-bold font-mono uppercase tracking-tight">
+      {/* Resume Document Paper Card */}
+      <article className="bg-white border border-neutral-200 rounded-2xl p-8 sm:p-14 space-y-10 shadow-sm print-border-none print-shadow-none print-bg-transparent print:p-0">
+        {/* Header */}
+        <AnimatedSection delay={0.2} className="text-center space-y-4 border-b border-neutral-200 pb-8">
+          <h1 className="text-4xl sm:text-5xl font-sans font-bold tracking-tight text-neutral-900">
             Cristhian Victor Rojas Marquez
           </h1>
-          <p className="font-mono text-xs text-[#1a1a1a]/70">
-            Full-Stack Software Engineer
+          <p className="font-sans text-sm font-semibold text-blue-600 tracking-wider uppercase">
+            Full-Stack &amp; QA Automation Engineer
           </p>
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 font-mono text-xs text-[#1a1a1a]/60">
-            <span>Email: cristhian.rojas@example.com</span>
-            <span>•</span>
-            <span>Github: github.com/cristhian-rojas</span>
-            <span>•</span>
-            <span>Location: Cochabamba, Bolivia</span>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 font-mono text-sm text-neutral-600">
+            <a href="mailto:cristhian.rojas@example.com" className="hover:text-blue-600 transition-colors">
+              cristhian.rojas@example.com
+            </a>
+            <span className="text-neutral-300">&bull;</span>
+            <a href="https://github.com/cristhian-rojas" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+              github.com/cristhian-rojas
+            </a>
+            <span className="text-neutral-300">&bull;</span>
+            <span>Cochabamba, Bolivia</span>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Technical Profile */}
-        <section className="space-y-3">
-          <h2 className="text-base font-bold font-mono border-b border-[#1a1a1a]/10 pb-1 uppercase text-[#c02b2b]">
-            [01] Technical Profile
+        <AnimatedSection delay={0.3} className="space-y-4">
+          <h2 className="text-base font-sans font-bold border-b border-neutral-200 pb-2 uppercase text-neutral-900 tracking-wider flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+            Executive Summary
           </h2>
-          <p className="text-sm font-sans leading-relaxed text-[#1a1a1a]/85">
-            Software Engineer specializing in automated software analysis/testing, building robust web applications, and designing real-time interfaces for signal processing pipelines. Passionate about system reliability, code quality, and developer tooling.
+          <p className="text-base font-sans leading-relaxed text-neutral-700">
+            Software Engineer specializing in full-stack web applications, scalable system architectures, and automated software analysis engines. Passionate about system reliability, continuous integration, test efficacy, and building seamless developer tooling.
           </p>
-        </section>
+        </AnimatedSection>
 
-        {/* Technical Skills */}
-        <section className="space-y-4">
-          <h2 className="text-base font-bold font-mono border-b border-[#1a1a1a]/10 pb-1 uppercase text-[#c02b2b]">
-            [02] Technical Skills
+        {/* Technical Skills Matrix */}
+        <AnimatedSection delay={0.4} className="space-y-4">
+          <h2 className="text-base font-sans font-bold border-b border-neutral-200 pb-2 uppercase text-neutral-900 tracking-wider flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+            Technical Skills
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
-            <div className="space-y-1">
-              <span className="font-bold text-[#2c5f4b]">[Programming Languages]</span>
-              <p className="font-sans text-xs text-[#1a1a1a]/80">TypeScript, JavaScript, Python, Java, C/C++</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono text-sm">
+            <div className="space-y-2 border-l-2 border-blue-600 pl-4">
+              <span className="font-bold font-sans text-neutral-900 block">Languages</span>
+              <p className="font-sans text-sm text-neutral-600">
+                TypeScript, JavaScript (ES6+), Python 3, Java, C/C++
+              </p>
             </div>
-            <div className="space-y-1">
-              <span className="font-bold text-[#2c5f4b]">[Frameworks & Libraries]</span>
-              <p className="font-sans text-xs text-[#1a1a1a]/80">React, Next.js, Node.js, Express, PyTorch, MNE-Python</p>
+            <div className="space-y-2 border-l-2 border-neutral-200 pl-4">
+              <span className="font-bold font-sans text-neutral-900 block">Frameworks</span>
+              <p className="font-sans text-sm text-neutral-600">
+                React, Next.js (App Router), Node.js, Express, Tailwind CSS, Framer Motion
+              </p>
             </div>
-            <div className="space-y-1">
-              <span className="font-bold text-[#2c5f4b]">[Databases & Tools]</span>
-              <p className="font-sans text-xs text-[#1a1a1a]/80">SQLite, PostgreSQL, Prisma ORM, WebSockets, Git, Arch Linux</p>
+            <div className="space-y-2 border-l-2 border-neutral-200 pl-4">
+              <span className="font-bold font-sans text-neutral-900 block">Databases &amp; Systems</span>
+              <p className="font-sans text-sm text-neutral-600">
+                PostgreSQL, Prisma ORM, SQLite, Git, Linux, Docker
+              </p>
             </div>
-            <div className="space-y-1">
-              <span className="font-bold text-[#2c5f4b]">[Quality Assurance]</span>
-              <p className="font-sans text-xs text-[#1a1a1a]/80">Jest, Cypress, Mutation Testing, AST Analysis, CI/CD</p>
+            <div className="space-y-2 border-l-2 border-blue-600 pl-4">
+              <span className="font-bold font-sans text-neutral-900 block">QA &amp; Automation</span>
+              <p className="font-sans text-sm text-neutral-600">
+                Mutation Testing, Jest, AST Analysis, CI/CD Pipelines
+              </p>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
-        {/* Experience */}
-        <section className="space-y-4">
-          <h2 className="text-base font-bold font-mono border-b border-[#1a1a1a]/10 pb-1 uppercase text-[#c02b2b]">
-            [03] Professional Experience
+        {/* Experience Timeline */}
+        <AnimatedSection delay={0.5} className="space-y-6">
+          <h2 className="text-base font-sans font-bold border-b border-neutral-200 pb-2 uppercase text-neutral-900 tracking-wider flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+            Professional Experience
           </h2>
 
-          <div className="space-y-3">
-            <div className="flex justify-between items-start font-mono text-xs">
-              <div>
-                <h3 className="font-bold text-sm text-[#1a1a1a]">
-                  Software Engineer Intern (QA & Automation)
-                </h3>
-                <p className="text-[#1a1a1a]/70">Bolivian Tech Solutions</p>
+          <div className="space-y-8">
+            <div className="border-l-2 border-blue-600 pl-5 space-y-3">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <div>
+                  <h3 className="font-bold font-sans text-lg text-neutral-900">
+                    Software Engineer Intern (QA &amp; Automation)
+                  </h3>
+                  <p className="text-blue-600 font-mono text-sm font-medium">Bolivian Tech Solutions</p>
+                </div>
+                <span className="px-3 py-1 bg-neutral-100 text-neutral-800 text-xs font-mono font-medium rounded-md">
+                  Nov 2024 &mdash; Feb 2025
+                </span>
               </div>
-              <span className="text-right text-[#1a1a1a]/70">Nov 2024 — Feb 2025</span>
+              <ul className="list-disc pl-5 font-sans text-base text-neutral-700 space-y-2 leading-relaxed">
+                <li>
+                  Designed and executed automated regression test suites for high-traffic web services using TypeScript and Jest.
+                </li>
+                <li>
+                  Integrated AST mutation testing analysis to measure test suite efficacy and eliminate silent test failures.
+                </li>
+                <li>
+                  Reduced continuous integration build feedback times by 15% through test parallelization and container optimization.
+                </li>
+              </ul>
             </div>
-            <ul className="list-disc pl-5 font-sans text-xs text-[#1a1a1a]/80 space-y-1">
-              <li>Designed and built automated regression test suites for high-traffic web services.</li>
-              <li>Integrated mutation testing analysis to measure and improve test suite efficacy.</li>
-              <li>Reduced continuous integration build feedback times by 15% through test parallelization.</li>
-            </ul>
           </div>
+        </AnimatedSection>
 
-          <div className="space-y-3 pt-2">
-            <div className="flex justify-between items-start font-mono text-xs">
-              <div>
-                <h3 className="font-bold text-sm text-[#1a1a1a]">
-                  Software Developer Intern (BCI Signal Processing)
-                </h3>
-                <p className="text-[#1a1a1a]/70">Academic Signal Lab</p>
-              </div>
-              <span className="text-right text-[#1a1a1a]/70">Jun 2025 — Oct 2025</span>
-            </div>
-            <ul className="list-disc pl-5 font-sans text-xs text-[#1a1a1a]/80 space-y-1">
-              <li>Developed real-time Python pipelines to stream and preprocess electroencephalography (EEG) data.</li>
-              <li>Built and optimized signal classification convolutional neural networks (CNNs) in PyTorch.</li>
-              <li>Created a low-latency visualization dashboard using WebSockets and React.</li>
-            </ul>
-          </div>
-        </section>
-
-        {/* Key Open Source Projects & Contributions */}
-        <section className="space-y-4">
-          <h2 className="text-base font-bold font-mono border-b border-[#1a1a1a]/10 pb-1 uppercase text-[#c02b2b]">
-            [04] Key Open Source Projects
+        {/* Key Open Source Projects */}
+        <AnimatedSection delay={0.6} className="space-y-4">
+          <h2 className="text-base font-sans font-bold border-b border-neutral-200 pb-2 uppercase text-neutral-900 tracking-wider flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+            Open Source Projects
           </h2>
-          <div className="space-y-3 font-sans text-xs text-[#1a1a1a]/80">
-            <div className="border-l border-[#1a1a1a]/20 pl-3">
-              <p className="font-bold font-mono text-[11px] text-[#2c5f4b]">
-                TS Mutation Testing Engine
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-sans text-base text-neutral-700">
+            <div className="border border-neutral-200 p-6 rounded-xl bg-neutral-50/50 space-y-3">
+              <p className="font-bold font-sans text-lg text-neutral-900 flex items-center gap-2">
+                <span className="text-blue-600">&bull;</span> TS Mutation Testing Engine
               </p>
-              <p className="mt-1">
-                Author of a static analysis testing utility for TypeScript. Evaluates test coverage quality by mutating AST nodes and running parallel test runners.
-              </p>
-            </div>
-            <div className="border-l border-[#1a1a1a]/20 pl-3 pt-1">
-              <p className="font-bold font-mono text-[11px] text-[#2c5f4b]">
-                EEG Motor Imagery Classifier
-              </p>
-              <p className="mt-1">
-                Developer of a real-time signal classification tool. Translates motor imagery data streams into software commands using WebSockets and PyTorch.
+              <p className="leading-relaxed">
+                Author of a static analysis testing utility for TypeScript. Evaluates test coverage quality by mutating AST nodes and running parallel worker threads.
               </p>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Education */}
-        <section className="space-y-4">
-          <h2 className="text-base font-bold font-mono border-b border-[#1a1a1a]/10 pb-1 uppercase text-[#c02b2b]">
-            [05] Education
+        <AnimatedSection delay={0.7} className="space-y-4">
+          <h2 className="text-base font-sans font-bold border-b border-neutral-200 pb-2 uppercase text-neutral-900 tracking-wider flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+            Education
           </h2>
-          
-          <div className="space-y-3">
-            <div className="flex justify-between items-start font-mono text-xs">
+          <div className="border-l-2 border-neutral-200 pl-5">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
               <div>
-                <h3 className="font-bold text-sm text-[#1a1a1a]">
+                <h3 className="font-bold font-sans text-lg text-neutral-900">
                   B.S. in Computer Science
                 </h3>
-                <p className="text-[#1a1a1a]/70">Universidad Mayor de San Simón (UMSS)</p>
+                <p className="text-neutral-600 font-mono text-sm mt-1">
+                  Universidad Mayor de San Sim&oacute;n (UMSS)
+                </p>
               </div>
-              <span className="text-right text-[#1a1a1a]/70">2022 — Present</span>
+              <span className="px-3 py-1 border border-neutral-200 text-neutral-600 text-xs font-mono font-medium rounded-md bg-white">
+                2022 &mdash; Present
+              </span>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
       </article>
     </div>
   );
 }
+

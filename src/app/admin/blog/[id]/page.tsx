@@ -24,20 +24,14 @@ export default async function EditBlogPage({ params }: PageProps) {
 
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
-      {/* Header */}
-      <section className="border-brutal bg-[#fafafa] p-6 shadow-brutal relative">
-        <div className="absolute top-0 left-0 w-2 h-full bg-[#c02b2b]" />
-        <div className="space-y-1 pl-2">
-          <span className="font-mono text-xs font-bold text-[#c02b2b] tracking-wider uppercase">
-            [ Edit Mode ]
-          </span>
-          <h1 className="text-3xl font-bold font-mono tracking-tight">
-            EDIT POST: {post.title.toUpperCase()}
-          </h1>
-        </div>
+      <section className="accent-bar pl-6 space-y-2">
+        <span className="font-mono text-xs font-bold text-rust tracking-wider uppercase">
+          Edit Mode
+        </span>
+        <h1 className="text-3xl font-display font-normal tracking-tight">
+          {post.title}
+        </h1>
       </section>
-
-      {/* Client Form */}
       <EditBlogFormClient post={post} />
     </div>
   );

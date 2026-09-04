@@ -15,7 +15,6 @@ export default function Markdown({ content }: MarkdownProps) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
 
-    // Close list if line is not a list item anymore
     if (inList && !line.startsWith("- ") && !line.startsWith("* ")) {
       elements.push(
         <ul key={`list-${i}`} className="list-disc pl-6 my-4 font-sans space-y-1.5">
@@ -30,36 +29,31 @@ export default function Markdown({ content }: MarkdownProps) {
       continue;
     }
 
-    // Headers
     if (line.startsWith("# ")) {
       elements.push(
-        <h1 key={i} className="text-2xl font-bold font-mono border-b border-[#1a1a1a]/10 pb-1 mt-6 mb-4 uppercase">
+        <h1 key={i} className="text-2xl font-display font-normal border-b border-ash/15 pb-1 mt-6 mb-4 text-bone">
           {line.slice(2)}
         </h1>
       );
     } else if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={i} className="text-xl font-bold font-mono mt-5 mb-3 uppercase">
+        <h2 key={i} className="text-xl font-display font-normal mt-5 mb-3 text-bone">
           {line.slice(3)}
         </h2>
       );
     } else if (line.startsWith("### ")) {
       elements.push(
-        <h3 key={i} className="text-lg font-bold font-mono mt-4 mb-2 uppercase">
+        <h3 key={i} className="text-lg font-mono font-bold mt-4 mb-2 text-bone/80 uppercase tracking-wide">
           {line.slice(4)}
         </h3>
       );
-    }
-    // Blockquote
-    else if (line.startsWith("> ")) {
+    } else if (line.startsWith("> ")) {
       elements.push(
-        <blockquote key={i} className="border-l-2 border-[#c02b2b] pl-4 italic text-sm text-[#1a1a1a]/70 my-4 font-sans">
+        <blockquote key={i} className="border-l-2 border-rust/40 pl-4 italic text-sm text-bone/50 my-4 font-sans">
           {parseInlineMarkdown(line.slice(2))}
         </blockquote>
       );
-    }
-    // Images: ![alt](url)
-    else if (line.startsWith("![") && line.includes("](")) {
+    } else if (line.startsWith("![") && line.includes("](")) {
       const altStart = 2;
       const altEnd = line.indexOf("](");
       const urlStart = altEnd + 2;
@@ -67,36 +61,37 @@ export default function Markdown({ content }: MarkdownProps) {
       const alt = line.substring(altStart, altEnd);
       const url = line.substring(urlStart, urlEnd);
       elements.push(
-        <div key={i} className="border border-[#1a1a1a]/15 bg-white p-2 my-6">
+        <div key={i} className="border border-ash/20 bg-void p-2 my-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={url} alt={alt} className="max-w-full h-auto grayscale contrast-125 object-cover mx-auto" />
-          <span className="text-[10px] font-mono text-[#1a1a1a]/50 text-center block mt-1.5">{alt}</span>
+          <img
+            src={url}
+            alt={alt}
+            className="max-w-full h-auto grayscale contrast-125 object-cover mx-auto"
+          />
+          <span className="text-[10px] font-mono text-ash text-center block mt-1.5">
+            {alt}
+          </span>
         </div>
       );
-    }
-    // List Items
-    else if (line.startsWith("- ") || line.startsWith("* ")) {
+    } else if (line.startsWith("- ") || line.startsWith("* ")) {
       inList = true;
       listItems.push(
-        <li key={`li-${i}`} className="text-sm text-[#1a1a1a]/85 leading-relaxed">
+        <li key={`li-${i}`} className="text-sm text-bone/70 leading-relaxed">
           {parseInlineMarkdown(line.slice(2))}
         </li>
       );
-    }
-    // Standard Paragraph
-    else {
+    } else {
       elements.push(
-        <p key={i} className="text-sm font-sans leading-relaxed text-[#1a1a1a]/85 my-3">
+        <p key={i} className="text-sm font-sans leading-relaxed text-bone/70 my-3">
           {parseInlineMarkdown(line)}
         </p>
       );
     }
   }
 
-  // Handle trailing list items
   if (inList) {
     elements.push(
-      <ul key={`list-end`} className="list-disc pl-6 my-4 font-sans space-y-1.5">
+      <ul key="list-end" className="list-disc pl-6 my-4 font-sans space-y-1.5">
         {listItems}
       </ul>
     );
@@ -105,7 +100,6 @@ export default function Markdown({ content }: MarkdownProps) {
   return <div className="space-y-2">{elements}</div>;
 }
 
-// Parse bold **text** and links [text](url)
 function parseInlineMarkdown(text: string): React.ReactNode {
   const parts: React.ReactNode[] = [];
   let currentText = text;
@@ -115,8 +109,10 @@ function parseInlineMarkdown(text: string): React.ReactNode {
     const boldMatch = currentText.match(/\*\*(.*?)\*\*/);
     const linkMatch = currentText.match(/\[(.*?)\]\((.*?)\)/);
 
-    const boldIdx = boldMatch && boldMatch.index !== undefined ? boldMatch.index : Infinity;
-    const linkIdx = linkMatch && linkMatch.index !== undefined ? linkMatch.index : Infinity;
+    const boldIdx =
+      boldMatch && boldMatch.index !== undefined ? boldMatch.index : Infinity;
+    const linkIdx =
+      linkMatch && linkMatch.index !== undefined ? linkMatch.index : Infinity;
 
     if (boldIdx === Infinity && linkIdx === Infinity) {
       parts.push(currentText);
@@ -128,7 +124,7 @@ function parseInlineMarkdown(text: string): React.ReactNode {
       const matchText = boldMatch![1];
       parts.push(before);
       parts.push(
-        <strong key={`b-${keyIdx++}`} className="font-bold">
+        <strong key={`b-${keyIdx++}`} className="font-bold text-bone">
           {matchText}
         </strong>
       );
@@ -144,7 +140,7 @@ function parseInlineMarkdown(text: string): React.ReactNode {
           href={linkUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#c02b2b] hover:underline"
+          className="text-rust hover:underline"
         >
           {linkText}
         </a>

@@ -1,111 +1,111 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #1a1a1a;
-  --primary-accent: #c02b2b;
-  --secondary-accent: #2c5f4b;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F7F7;
+  --text-primary: #1A1A1A;
+  --text-secondary: #555555;
+  --accent: #2563EB; /* A clean blue accent */
+  --accent-hover: #1D4ED8;
+  --border-subtle: #E5E5E5;
+  
+  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary-accent: var(--primary-accent);
-  --color-secondary-accent: var(--secondary-accent);
-  
-  --font-sans: var(--font-inter), "Inter", "Helvetica Neue", system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "Courier New", monospace;
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border-subtle: var(--border-subtle);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-sans);
+  line-height: 1.6;
 }
 
-/* Brutalist / Academic Spacing & Border Details */
-.border-brutal {
-  border: 1px solid #1a1a1a;
+::selection {
+  background-color: var(--accent);
+  color: #ffffff;
 }
 
-.border-brutal-muted {
-  border: 1px solid rgba(26, 26, 26, 0.15);
-}
-
-.shadow-brutal {
-  box-shadow: 3px 3px 0px 0px #1a1a1a;
-}
-
-.shadow-brutal-red {
-  box-shadow: 3px 3px 0px 0px #c02b2b;
-}
-
-.shadow-brutal-green {
-  box-shadow: 3px 3px 0px 0px #2c5f4b;
-}
-
-.btn-brutal-primary {
-  background-color: var(--primary-accent);
-  color: #fafafa;
-  border: 1px solid #1a1a1a;
-  box-shadow: 2px 2px 0px 0px #1a1a1a;
-  transition: all 0.1s ease-in-out;
+/* Minimalist Button styles */
+.btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
   cursor: pointer;
+  font-weight: 500;
 }
 
-.btn-brutal-primary:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px 0px #1a1a1a;
+.btn-primary:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
-.btn-brutal-primary:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px 0px #1a1a1a;
-}
-
-.btn-brutal-secondary {
-  background-color: #fafafa;
-  color: #1a1a1a;
-  border: 1px solid #1a1a1a;
-  box-shadow: 2px 2px 0px 0px #1a1a1a;
-  transition: all 0.1s ease-in-out;
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
   cursor: pointer;
+  font-weight: 500;
 }
 
-.btn-brutal-secondary:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px 0px #1a1a1a;
+.btn-secondary:hover {
+  border-color: var(--text-primary);
+  background-color: var(--bg-secondary);
 }
 
-.btn-brutal-secondary:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px 0px #1a1a1a;
-}
-
-.link-brutal {
+/* Minimalist Link styles */
+.link-underline {
   position: relative;
   text-decoration: none;
-  font-family: var(--font-mono);
+  color: var(--accent);
+  font-weight: 500;
 }
 
-.link-brutal::after {
+.link-underline::after {
   content: '';
   position: absolute;
   width: 100%;
   transform: scaleX(0);
   height: 1px;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
-  background-color: var(--primary-accent);
+  background-color: var(--accent);
   transform-origin: bottom right;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
-.link-brutal:hover::after {
+.link-underline:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
 
-.link-brutal:hover {
-  color: var(--primary-accent);
+/* Print styles */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
 }
+
