@@ -24,6 +24,13 @@ No test, typecheck (`tsc --noEmit`), or formatter scripts exist.
 - Custom regex-based Markdown parser at `src/components/Markdown.tsx`
 - Session auth via SHA-256 hashed `ADMIN_PASSWORD` in httpOnly cookie (no OAuth, no DB sessions)
 - All public pages: `export const revalidate = 0` (fully dynamic, no ISR/SSG)
+- Bilingual system (`en` default, `es` toggle) with client `LanguageProvider` and bilingual Prisma models
+
+## Git Workflow & Commit Guidelines (MANDATORY FOR ALL AGENTS)
+- **Commit on Every Major Milestone**: Every time a major step, feature, bug fix, or significant refactor is completed, the agent **MUST** create a Git commit immediately after verifying the build (`npm run build` and `npm run lint`).
+- **Conventional Commits**: Use clear, conventional commit messages (e.g. `feat(...)`, `fix(...)`, `refactor(...)`, `style(...)`).
+- **Keep Repository Clean**: Verify `git status` before and after operations, ensuring untracked files are staged properly.
+- **Protect Secrets**: Never commit `.env` or sensitive credentials. Ensure `.env*` remains in `.gitignore`.
 
 ## Key quirks
 - **Middleware inactive**: `src/proxy.ts` exports `proxy` but Next.js middleware must be a default export from `src/middleware.ts`
@@ -32,4 +39,4 @@ No test, typecheck (`tsc --noEmit`), or formatter scripts exist.
 - **Tailwind v4**: uses `@import "tailwindcss"` in CSS, no `tailwind.config.*` file
 - **ESLint 9 flat config** in `eslint.config.mjs`
 - No pre-commit, CI, or deployment config in this repo (deploy targets Vercel per DEPLOYMENT.md)
-- Brutalist utility classes in `src/app/globals.css`: `.border-brutal`, `.shadow-brutal`, `.btn-brutal-primary`
+
