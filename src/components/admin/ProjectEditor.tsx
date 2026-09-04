@@ -342,7 +342,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
             </div>
 
             {/* Core Metadata Fields */}
-            <div className="space-y-4">
+            <div className="space-y-5">
               {/* Title Input */}
               <div className="space-y-1.5">
                 <label className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-secondary)] block">
@@ -355,7 +355,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     value={title}
                     onChange={(e) => handleTitleChange(e.target.value)}
                     placeholder="e.g. TypeScript AST Mutation Testing Engine"
-                    className="w-full px-3.5 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-sans text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-base font-sans font-medium text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors shadow-2xs"
                   />
                 ) : (
                   <input
@@ -363,7 +363,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     value={titleEs}
                     onChange={(e) => setTitleEs(e.target.value)}
                     placeholder="ej. Motor de Pruebas de Mutación AST en TypeScript"
-                    className="w-full px-3.5 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-sans text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-base font-sans font-medium text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors shadow-2xs"
                   />
                 )}
               </div>
@@ -386,7 +386,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     setIsSlugManuallyEdited(true);
                   }}
                   placeholder="project-slug-format"
-                  className="w-full px-3.5 py-2 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                  className="w-full px-4 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors shadow-2xs"
                 />
               </div>
 
@@ -397,20 +397,20 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                 </label>
                 {activeLang === "en" ? (
                   <textarea
-                    rows={2}
+                    rows={3}
                     required
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Concise overview of what this project accomplishes..."
-                    className="w-full px-3.5 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-sans text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-sans text-[var(--text-primary)] leading-relaxed focus:outline-none focus:border-[var(--accent)] transition-colors resize-y shadow-2xs"
                   />
                 ) : (
                   <textarea
-                    rows={2}
+                    rows={3}
                     value={descriptionEs}
                     onChange={(e) => setDescriptionEs(e.target.value)}
                     placeholder="Resumen conciso del proyecto para tarjetas y encabezados..."
-                    className="w-full px-3.5 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-sans text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-sm font-sans text-[var(--text-primary)] leading-relaxed focus:outline-none focus:border-[var(--accent)] transition-colors resize-y shadow-2xs"
                   />
                 )}
               </div>
@@ -420,11 +420,11 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                 <label className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-secondary)] block">
                   Technologies / Tech Stack
                 </label>
-                <div className="flex flex-wrap items-center gap-2 p-2 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl min-h-[44px]">
+                <div className="flex flex-wrap items-center gap-2 p-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl min-h-[52px] shadow-2xs">
                   {techStackArray.map((tag) => (
                     <span
                       key={tag}
-                      className="flex items-center gap-1.5 px-2.5 py-1 bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-xs font-mono rounded-md shadow-2xs"
+                      className="flex items-center gap-1.5 px-3 py-1 bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-xs font-mono rounded-md shadow-2xs"
                     >
                       <span>{tag}</span>
                       <button
@@ -436,19 +436,19 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                       </button>
                     </span>
                   ))}
-                  <div className="flex items-center gap-1 flex-1 min-w-[140px]">
+                  <div className="flex items-center gap-1 flex-1 min-w-[150px]">
                     <input
                       type="text"
                       value={newTagInput}
                       onChange={(e) => setNewTagInput(e.target.value)}
                       onKeyDown={handleTagKeyDown}
                       placeholder="Add tag (e.g. Next.js)..."
-                      className="w-full bg-transparent px-2 py-1 text-xs font-mono text-[var(--text-primary)] focus:outline-none"
+                      className="w-full bg-transparent px-2.5 py-1 text-xs font-mono text-[var(--text-primary)] focus:outline-none"
                     />
                     <button
                       type="button"
                       onClick={handleAddTag}
-                      className="p-1 hover:bg-[var(--bg-secondary)] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent)] cursor-pointer"
+                      className="p-1.5 hover:bg-[var(--bg-secondary)] rounded-md text-[var(--text-secondary)] hover:text-[var(--accent)] cursor-pointer"
                       title="Add Tag"
                     >
                       <Plus className="w-3.5 h-3.5" />
@@ -468,7 +468,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     value={repoUrl}
                     onChange={(e) => setRepoUrl(e.target.value)}
                     placeholder="https://github.com/..."
-                    className="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors shadow-2xs"
                   />
                 </div>
 
@@ -481,7 +481,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     value={liveUrl}
                     onChange={(e) => setLiveUrl(e.target.value)}
                     placeholder="https://..."
-                    className="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors shadow-2xs"
                   />
                 </div>
 
@@ -492,7 +492,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors cursor-pointer"
+                    className="w-full px-4 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] transition-colors cursor-pointer shadow-2xs"
                   >
                     <option value="COMPLETED">COMPLETED (Terminado)</option>
                     <option value="IN_PROGRESS">IN_PROGRESS (En desarrollo)</option>
@@ -674,7 +674,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
               {/* Textarea */}
               <textarea
                 ref={textareaRef}
-                rows={16}
+                rows={24}
                 value={activeLang === "en" ? content : contentEs}
                 onChange={(e) => {
                   if (activeLang === "en") {
@@ -688,7 +688,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     ? "# System Architecture\n\nWrite in-depth engineering breakdowns here..."
                     : "# Arquitectura del Sistema\n\nEscribe el desglose de ingeniería en español aquí..."
                 }
-                className="w-full px-4 py-3 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl font-mono text-xs text-[var(--text-primary)] leading-relaxed focus:outline-none focus:border-[var(--accent)] transition-colors"
+                className="w-full min-h-[580px] lg:min-h-[720px] px-4 py-3.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl font-mono text-sm text-[var(--text-primary)] leading-relaxed focus:outline-none focus:border-[var(--accent)] transition-colors resize-y shadow-2xs"
               />
             </div>
           </div>
@@ -696,7 +696,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
 
         {/* RIGHT PANE: Live Frontend Preview */}
         {(viewMode === "split" || viewMode === "preview") && (
-          <div className="space-y-4">
+          <div className="space-y-4 lg:sticky lg:top-8">
             {/* Live Preview Controller Header */}
             <div className="flex items-center justify-between bg-[var(--bg-card)] border border-[var(--border-subtle)] px-4 py-2.5 rounded-xl shadow-xs">
               <div className="flex items-center gap-2 font-mono text-xs text-[var(--text-secondary)]">
@@ -740,10 +740,10 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
             </div>
 
             {/* LIVE PREVIEW CONTAINER */}
-            <div className="p-4 sm:p-6 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl min-h-[500px] overflow-y-auto max-h-[800px]">
+            <div className="p-4 sm:p-8 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl min-h-[580px] lg:h-[calc(100vh-140px)] lg:min-h-[720px] overflow-y-auto shadow-inner">
               {previewStyle === "detail" ? (
                 /* Detail Page Mockup */
-                <div className="space-y-6 max-w-2xl mx-auto">
+                <div className="space-y-6 w-full max-w-3xl mx-auto">
                   <div className="font-mono text-xs text-[var(--accent)]">
                     &larr; {activeLang === "es" ? "Volver a Proyectos" : "Back to Projects"}
                   </div>

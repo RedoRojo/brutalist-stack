@@ -23,7 +23,7 @@ export default async function EditProjectPage({ params }: PageProps) {
   }
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto">
+    <div className="space-y-6 max-w-[1700px] w-full mx-auto">
       <EditProjectFormClient project={project} />
     </div>
   );

@@ -57,7 +57,7 @@ export default function RootLayout({
         <LanguageProvider>
           <HeaderNav />
 
-          <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-12 md:py-20 overflow-hidden">
+          <main className="flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
             <PageTransition>
               {children}
             </PageTransition>

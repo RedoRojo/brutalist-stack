@@ -31,7 +31,7 @@ export default function HomeContent({ featuredProjects }: HomeContentProps) {
   ];
 
   return (
-    <div className="space-y-20">
+    <div className="max-w-4xl mx-auto space-y-20">
       {/* Hero Section */}
       <AnimatedSection delay={0.1} className="space-y-6 pt-10">
         <div className="flex items-center gap-3">

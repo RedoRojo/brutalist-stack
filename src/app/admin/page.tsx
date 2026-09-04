@@ -15,7 +15,7 @@ export default async function AdminPage() {
   const posts = await getPosts();
 
   return (
-    <div className="space-y-8">
+    <div className="max-w-7xl mx-auto space-y-8">
       {/* Admin Header */}
       <section className="accent-bar pl-6 space-y-2">
         <span className="font-mono text-xs font-bold text-rust tracking-wider uppercase">

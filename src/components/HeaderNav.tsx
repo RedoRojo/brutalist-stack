@@ -19,7 +19,7 @@ export default function HeaderNav() {
 
   return (
     <header className="border-b border-[var(--border-subtle)] sticky top-0 bg-[var(--bg-primary)]/85 backdrop-blur-md z-50 transition-colors duration-200">
-      <div className="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-3">
           <span
             className="w-2 h-2 rounded-full bg-[var(--accent-green)] inline-block animate-pulse"

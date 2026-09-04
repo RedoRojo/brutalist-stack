@@ -17,7 +17,7 @@ export default function ProjectsListContent({ projects }: ProjectsListContentPro
   const { language, t } = useLanguage();
 
   return (
-    <div className="space-y-10">
+    <div className="max-w-5xl mx-auto space-y-10">
       {/* Page Header */}
       <AnimatedSection delay={0.1} className="space-y-4">
         <div className="flex items-center gap-2">
