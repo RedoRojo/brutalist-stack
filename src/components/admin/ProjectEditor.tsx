@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   Bold,
   Italic,
@@ -84,12 +85,17 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
   const [featured, setFeatured] = useState(initialData?.featured || false);
   const [status, setStatus] = useState(initialData?.status || "COMPLETED");
 
-  // UI state
-  const [activeLang, setActiveLang] = useState<"en" | "es">("en");
+  // UI state & language sync
+  const { language, setLanguage } = useLanguage();
+  const activeLang: "en" | "es" = language === "es" ? "es" : "en";
   const [viewMode, setViewMode] = useState<"split" | "edit" | "preview">("split");
   const [previewStyle, setPreviewStyle] = useState<"detail" | "card">("detail");
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  function handleSwitchLanguage(lang: "en" | "es") {
+    setLanguage(lang);
+  }
 
   // Auto-slug generator
   function handleTitleChange(val: string) {
@@ -209,9 +215,20 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
   }
 
   // Active values for preview
-  const previewTitle = activeLang === "es" && titleEs.trim() ? titleEs : title || (activeLang === "es" ? "Título del Proyecto" : "Project Title");
-  const previewDesc = activeLang === "es" && descriptionEs.trim() ? descriptionEs : description || (activeLang === "es" ? "Descripción del proyecto para previsualización en tiempo real." : "Project description for real-time frontend preview.");
-  const previewContent = activeLang === "es" && contentEs.trim() ? contentEs : content;
+  const previewTitle =
+    activeLang === "es"
+      ? (titleEs.trim() || (title.trim() ? `${title} (Español)` : "Título del Proyecto"))
+      : (title.trim() || "Project Title");
+
+  const previewDesc =
+    activeLang === "es"
+      ? (descriptionEs.trim() || (description.trim() ? `${description} (Español)` : "Descripción del proyecto para previsualización en tiempo real."))
+      : (description.trim() || "Project description for real-time frontend preview.");
+
+  const previewContent =
+    activeLang === "es"
+      ? (contentEs.trim() ? contentEs : "")
+      : content;
 
   return (
     <div className="space-y-6">
@@ -236,7 +253,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
           <div className="flex items-center p-1 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-subtle)] font-mono text-xs">
             <button
               type="button"
-              onClick={() => setActiveLang("en")}
+              onClick={() => handleSwitchLanguage("en")}
               className={`px-3 py-1 rounded-md transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeLang === "en"
                   ? "bg-[var(--bg-card)] text-[var(--text-primary)] font-semibold shadow-xs"
@@ -248,7 +265,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
             </button>
             <button
               type="button"
-              onClick={() => setActiveLang("es")}
+              onClick={() => handleSwitchLanguage("es")}
               className={`px-3 py-1 rounded-md transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeLang === "es"
                   ? "bg-[var(--bg-card)] text-[var(--text-primary)] font-semibold shadow-xs"

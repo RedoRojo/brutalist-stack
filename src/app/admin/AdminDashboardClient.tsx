@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { deleteProject, deletePost, logoutAdmin } from "./actions";
 import Card from "@/components/Card";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Project {
   id: string;
@@ -58,6 +59,7 @@ export default function AdminDashboardClient({
   initialPosts,
 }: AdminDashboardClientProps) {
   const router = useRouter();
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<"projects" | "blog">("projects");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{
@@ -310,10 +312,10 @@ export default function AdminDashboardClient({
                       >
                         <td className="py-3 pr-2 font-sans text-sm text-bone">
                           <div className="flex items-center gap-2">
-                            <span>{project.title}</span>
+                            <span>{language === "es" && project.titleEs ? project.titleEs : project.title}</span>
                             {project.featured && (
                               <span className="text-[10px] text-rust font-mono border border-rust/40 px-1 py-0.2 rounded">
-                                ★ Featured
+                                ★ {language === "es" ? "Destacado" : "Featured"}
                               </span>
                             )}
                           </div>
@@ -323,12 +325,18 @@ export default function AdminDashboardClient({
                         </td>
                         <td className="py-3 pr-2 hidden lg:table-cell text-bone/70">
                           <span className="px-2 py-0.5 bg-void border border-ash/20 rounded text-[11px]">
-                            {project._count?.posts ?? 0} {project._count?.posts === 1 ? "post" : "posts"}
+                            {project._count?.posts ?? 0} {language === "es" ? (project._count?.posts === 1 ? "publicación" : "publicaciones") : (project._count?.posts === 1 ? "post" : "posts")}
                           </span>
                         </td>
                         <td className="py-3 pr-2 hidden md:table-cell text-bone/60">
                           <span className="text-[11px] uppercase">
-                            {project.status || "COMPLETED"}
+                            {project.status === "COMPLETED"
+                              ? language === "es"
+                                ? "COMPLETADO"
+                                : "COMPLETED"
+                              : language === "es"
+                              ? "EN DESARROLLO"
+                              : "IN PROGRESS"}
                           </span>
                         </td>
                         <td className="py-3 pr-2 hidden sm:table-cell text-bone/50">
@@ -408,7 +416,7 @@ export default function AdminDashboardClient({
                         className="hover:bg-bone/5 transition-colors"
                       >
                         <td className="py-3 pr-2 font-sans text-sm text-bone">
-                          <div>{post.title}</div>
+                          <div>{language === "es" && post.titleEs ? post.titleEs : post.title}</div>
                           <span className="font-mono text-[11px] text-ash block">
                             /{post.slug}
                           </span>
@@ -416,15 +424,17 @@ export default function AdminDashboardClient({
                         <td className="py-3 pr-2 hidden lg:table-cell text-bone/70">
                           {post.project ? (
                             <span className="px-2 py-0.5 bg-rust/10 text-rust border border-rust/30 rounded text-[11px]">
-                              📌 {post.project.title}
+                              📌 {language === "es" && post.project.titleEs ? post.project.titleEs : post.project.title}
                             </span>
                           ) : (
-                            <span className="text-ash text-[11px]">Standalone</span>
+                            <span className="text-ash text-[11px]">{language === "es" ? "Independiente" : "Standalone"}</span>
                           )}
                         </td>
                         <td className="py-3 pr-2 hidden md:table-cell text-bone/60">
                           <span className={`text-[10px] px-1.5 py-0.5 rounded ${post.published ? "bg-bone/10 text-bone" : "bg-ash/20 text-ash"}`}>
-                            {post.published ? "Published" : "Draft"}
+                            {post.published
+                              ? language === "es" ? "Publicado" : "Published"
+                              : language === "es" ? "Borrador" : "Draft"}
                           </span>
                         </td>
                         <td className="py-3 pr-2 hidden sm:table-cell text-bone/50">
