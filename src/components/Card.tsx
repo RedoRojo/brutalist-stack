@@ -19,9 +19,9 @@ export default function Card({ children, accent = false, className = "", delay =
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={`
-        bg-white border border-neutral-200 rounded-xl p-6
-        hover:shadow-lg hover:border-neutral-300 transition-shadow duration-300
-        ${accent ? "border-l-4 border-l-blue-600" : ""}
+        bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-primary)] rounded-xl p-6
+        hover:shadow-lg hover:border-[var(--border-hover)] transition-all duration-200
+        ${accent ? "border-l-4 border-l-[var(--accent)]" : ""}
         ${className}
       `}
     >

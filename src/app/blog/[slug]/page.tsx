@@ -23,7 +23,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <div className="space-y-8 max-w-3xl mx-auto">
       {/* Back link */}
       <div className="font-mono text-xs">
-        <Link href="/blog" className="text-rust link-underline">
+        <Link href="/blog" className="text-[var(--accent)] link-underline">
           &larr; Back to Blog
         </Link>
       </div>
@@ -31,7 +31,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       {/* Post Header */}
       <Card accent>
         <div className="space-y-4">
-          <Badge>
+          <Badge variant="red">
             PUBLISHED{" "}
             {new Date(post.publishedAt).toLocaleDateString("en-US", {
               year: "numeric",
@@ -39,10 +39,10 @@ export default async function BlogPostPage({ params }: PageProps) {
               day: "numeric",
             })}
           </Badge>
-          <h1 className="text-2xl sm:text-3xl font-display font-normal tracking-tight leading-snug text-bone">
+          <h1 className="text-2xl sm:text-3xl font-display font-normal tracking-tight leading-snug text-[var(--text-primary)]">
             {post.title}
           </h1>
-          <p className="text-sm font-sans text-bone/60 border-l-2 border-rust/40 pl-4 leading-relaxed italic">
+          <p className="text-sm font-sans text-[var(--text-secondary)] border-l-2 border-[var(--accent)] pl-4 leading-relaxed italic">
             {post.summary}
           </p>
         </div>
@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       {/* Post Content */}
       <Card>
-        <div className="font-mono text-[10px] text-ash uppercase tracking-wider border-b border-ash/15 pb-2 mb-4">
+        <div className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2 mb-4">
           Journal Entry
         </div>
         <Markdown content={post.content} />

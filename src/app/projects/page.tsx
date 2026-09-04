@@ -29,10 +29,10 @@ export default async function ProjectsPage() {
         <div className="flex items-center gap-2">
           <Badge variant="red">ENGINEERING PORTFOLIO</Badge>
         </div>
-        <h1 className="text-3xl md:text-4xl font-display font-normal tracking-tight text-neutral-900">
+        <h1 className="text-3xl md:text-4xl font-display font-normal tracking-tight text-[var(--text-primary)]">
           Projects &amp; Open Source Contributions
         </h1>
-        <p className="text-sm font-sans text-neutral-600 max-w-2xl leading-relaxed">
+        <p className="text-sm font-sans text-[var(--text-secondary)] max-w-2xl leading-relaxed">
           A comprehensive showcase of full-stack web applications, automated testing tools, and real-time signal classification repositories.
         </p>
       </section>
@@ -40,7 +40,7 @@ export default async function ProjectsPage() {
       {/* Projects Grid */}
       {projects.length === 0 ? (
         <Card className="p-12 text-center">
-          <p className="font-mono text-sm text-neutral-500">
+          <p className="font-mono text-sm text-[var(--text-muted)]">
             No projects published yet in database.
           </p>
           <div className="mt-4">
@@ -50,19 +50,19 @@ export default async function ProjectsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
-            <Card key={project.id} className="flex flex-col justify-between hover:border-crimson transition-all">
+            <Card key={project.id} className="flex flex-col justify-between hover:border-[var(--accent)] transition-all">
               <div className="space-y-4">
-                <h2 className="font-mono font-bold text-base text-neutral-900 hover:text-crimson transition-colors">
+                <h2 className="font-mono font-bold text-base text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
                   <Link href={`/projects/${project.id}`}>
                     {project.title}
                   </Link>
                 </h2>
-                <p className="text-sm font-sans leading-relaxed text-neutral-600 min-h-[4rem]">
+                <p className="text-sm font-sans leading-relaxed text-[var(--text-secondary)] min-h-[4rem]">
                   {project.description}
                 </p>
                 {project.techStack && (
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">
+                    <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                       Tech Stack
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -73,13 +73,13 @@ export default async function ProjectsPage() {
                   </div>
                 )}
               </div>
-              <div className="flex gap-4 pt-4 mt-6 border-t border-dotted border-neutral-200 font-mono text-xs">
+              <div className="flex gap-4 pt-4 mt-6 border-t border-dotted border-[var(--border-subtle)] font-mono text-xs">
                 {project.repoUrl && (
                   <a
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-crimson font-medium hover:underline"
+                    className="text-[var(--accent)] font-medium hover:underline"
                   >
                     Source Code (GitHub)
                   </a>
@@ -89,7 +89,7 @@ export default async function ProjectsPage() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-600 hover:text-neutral-900 hover:underline"
+                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:underline"
                   >
                     Live Demo &rarr;
                   </a>

@@ -23,7 +23,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     <div className="space-y-8 max-w-3xl mx-auto">
       {/* Back link */}
       <div className="font-mono text-xs">
-        <Link href="/projects" className="text-rust link-underline">
+        <Link href="/projects" className="text-[var(--accent)] link-underline">
           &larr; Back to Projects
         </Link>
       </div>
@@ -31,15 +31,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Project Header */}
       <Card accent>
         <div className="space-y-5">
-          <h1 className="text-2xl sm:text-3xl font-display font-normal tracking-tight text-bone">
+          <h1 className="text-2xl sm:text-3xl font-display font-normal tracking-tight text-[var(--text-primary)]">
             {project.title}
           </h1>
-          <p className="text-sm font-sans text-bone/60 border-l-2 border-rust/40 pl-4 leading-relaxed">
+          <p className="text-sm font-sans text-[var(--text-secondary)] border-l-2 border-[var(--accent)] pl-4 leading-relaxed">
             {project.description}
           </p>
           {project.techStack && (
             <div className="space-y-2">
-              <span className="text-[10px] font-mono text-ash uppercase tracking-wider block">
+              <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                 Tech Stack
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -49,13 +49,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
             </div>
           )}
-          <div className="flex flex-wrap gap-4 pt-3 font-mono text-xs border-t border-ash/15">
+          <div className="flex flex-wrap gap-4 pt-3 font-mono text-xs border-t border-[var(--border-subtle)]">
             {project.repoUrl && (
               <a
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-rust hover:underline"
+                className="text-[var(--accent)] hover:underline"
               >
                 View Source Code
               </a>
@@ -65,7 +65,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-bone/50 hover:text-bone hover:underline"
+                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:underline"
               >
                 View Live Site
               </a>
@@ -76,13 +76,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
       {/* Project Documentation */}
       <Card>
-        <div className="font-mono text-[10px] text-ash uppercase tracking-wider border-b border-ash/15 pb-2 mb-4">
+        <div className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2 mb-4">
           Project Documentation
         </div>
         {project.content ? (
           <Markdown content={project.content} />
         ) : (
-          <div className="border border-dashed border-ash/20 p-6 text-center bg-void font-mono text-xs text-ash">
+          <div className="border border-dashed border-[var(--border-subtle)] p-6 text-center bg-[var(--bg-secondary)] font-mono text-xs text-[var(--text-muted)] rounded-lg">
             No further details available for this project.
           </div>
         )}
