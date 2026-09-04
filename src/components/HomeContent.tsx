@@ -66,7 +66,7 @@ export default function HomeContent({ featuredProjects }: HomeContentProps) {
             <h2 className="font-sans text-lg font-semibold text-[var(--text-primary)]">
               {t.home.recruiter.title}
             </h2>
-            <span className="px-3 py-1 bg-[var(--accent-subtle)] text-[var(--accent-green)] border border-[var(--accent-border)] text-xs font-mono font-medium rounded-full">
+            <span className="px-3 py-1 bg-[var(--accent-green-bg)] text-[var(--accent-green)] border border-[var(--accent-green-border)] text-xs font-mono font-medium rounded-full">
               {t.home.recruiter.badge}
             </span>
           </div>

@@ -19,7 +19,7 @@ export default async function NewBlogPage() {
         <span className="font-mono text-xs font-bold text-rust tracking-wider uppercase">
           Blog Section
         </span>
-        <h1 className="text-3xl font-display font-normal tracking-tight">
+        <h1 className="text-3xl font-sans font-bold tracking-tight text-[var(--text-primary)]">
           Create New Blog Post
         </h1>
       </section>

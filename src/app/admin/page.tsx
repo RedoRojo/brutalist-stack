@@ -21,7 +21,7 @@ export default async function AdminPage() {
         <span className="font-mono text-xs font-bold text-rust tracking-wider uppercase">
           Authenticated: Admin Panel
         </span>
-        <h1 className="text-3xl font-display font-normal tracking-tight">
+        <h1 className="text-3xl font-sans font-bold tracking-tight text-[var(--text-primary)]">
           Admin Dashboard
         </h1>
       </section>

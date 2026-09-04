@@ -30,7 +30,7 @@ export default async function EditBlogPage({ params }: PageProps) {
         <span className="font-mono text-xs font-bold text-rust tracking-wider uppercase">
           Edit Mode
         </span>
-        <h1 className="text-3xl font-display font-normal tracking-tight">
+        <h1 className="text-3xl font-sans font-bold tracking-tight text-[var(--text-primary)]">
           {post.title}
         </h1>
       </section>

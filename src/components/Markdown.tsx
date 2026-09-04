@@ -31,13 +31,13 @@ export default function Markdown({ content }: MarkdownProps) {
 
     if (line.startsWith("# ")) {
       elements.push(
-        <h1 key={i} className="text-2xl font-display font-normal border-b border-[var(--border-subtle)] pb-1 mt-6 mb-4 text-[var(--text-primary)]">
+        <h1 key={i} className="text-2xl font-sans font-bold tracking-tight border-b border-[var(--border-subtle)] pb-1 mt-6 mb-4 text-[var(--text-primary)]">
           {line.slice(2)}
         </h1>
       );
     } else if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={i} className="text-xl font-display font-normal mt-5 mb-3 text-[var(--text-primary)]">
+        <h2 key={i} className="text-xl font-sans font-bold tracking-tight mt-5 mb-3 text-[var(--text-primary)]">
           {line.slice(3)}
         </h2>
       );

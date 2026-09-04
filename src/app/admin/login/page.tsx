@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <div className="max-w-md mx-auto my-12 bg-grit border border-ash/40 p-8 space-y-6">
       <div className="space-y-2 border-b border-ash/15 pb-4">
-        <h1 className="text-xl font-display font-normal text-bone">
+        <h1 className="text-xl font-sans font-bold tracking-tight text-[var(--text-primary)]">
           Access Restricted
         </h1>
         <p className="text-xs font-mono text-ash">
