@@ -9,15 +9,26 @@ const globalForPrisma = globalThis as unknown as {
 let prismaInstance: PrismaClient;
 
 if (typeof window === "undefined") {
-  const connectionString = process.env.DATABASE_URL;
+  let connectionString = process.env.DATABASE_URL;
 
   if (connectionString) {
+    const isLocal =
+      connectionString.includes("localhost") || connectionString.includes("127.0.0.1");
+
+    // Prevent pg-connection-string v3 security warning by explicitly enabling libpq compatibility
+    if (
+      !isLocal &&
+      /sslmode=(prefer|require|verify-ca)/.test(connectionString) &&
+      !connectionString.includes("uselibpqcompat=")
+    ) {
+      const separator = connectionString.includes("?") ? "&" : "?";
+      connectionString = `${connectionString}${separator}uselibpqcompat=true`;
+    }
+
     // Create a pg connection pool.
     const pool = new Pool({
       connectionString,
-      ssl: connectionString.includes("localhost") || connectionString.includes("127.0.0.1")
-        ? undefined
-        : { rejectUnauthorized: false },
+      ssl: isLocal ? undefined : { rejectUnauthorized: false },
     });
     
     const adapter = new PrismaPg(pool);
