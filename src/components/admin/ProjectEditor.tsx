@@ -331,7 +331,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
       <div className={`grid gap-6 ${viewMode === "split" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"}`}>
         {/* LEFT PANE: Editor & Controls */}
         {(viewMode === "split" || viewMode === "edit") && (
-          <div className="space-y-6 bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xs">
+          <div className="space-y-6 bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xs flex flex-col h-full">
             {/* Language active notice */}
             <div className="flex items-center justify-between text-xs font-mono border-b border-[var(--border-subtle)] pb-3 text-[var(--text-muted)]">
               <span className="flex items-center gap-2">
@@ -514,7 +514,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
             </div>
 
             {/* Markdown Documentation Editor with Rich Toolbar */}
-            <div className="space-y-3 pt-4 border-t border-[var(--border-subtle)]">
+            <div className="space-y-3 pt-4 border-t border-[var(--border-subtle)] flex-1 flex flex-col">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <label className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-secondary)] block">
                   {activeLang === "en" ? "Detailed Documentation (Markdown - EN)" : "Detailed Documentation (Markdown - ES)"}
@@ -688,7 +688,7 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                     ? "# System Architecture\n\nWrite in-depth engineering breakdowns here..."
                     : "# Arquitectura del Sistema\n\nEscribe el desglose de ingeniería en español aquí..."
                 }
-                className="w-full min-h-[580px] lg:min-h-[720px] px-4 py-3.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl font-mono text-sm text-[var(--text-primary)] leading-relaxed focus:outline-none focus:border-[var(--accent)] transition-colors resize-y shadow-2xs"
+                className="w-full flex-1 min-h-[580px] lg:min-h-[720px] px-4 py-3.5 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl font-mono text-sm text-[var(--text-primary)] leading-relaxed focus:outline-none focus:border-[var(--accent)] transition-colors resize-y shadow-2xs"
               />
             </div>
           </div>
@@ -696,9 +696,9 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
 
         {/* RIGHT PANE: Live Frontend Preview */}
         {(viewMode === "split" || viewMode === "preview") && (
-          <div className="space-y-4 lg:sticky lg:top-8">
+          <div className="flex flex-col h-full space-y-4">
             {/* Live Preview Controller Header */}
-            <div className="flex items-center justify-between bg-[var(--bg-card)] border border-[var(--border-subtle)] px-4 py-2.5 rounded-xl shadow-xs">
+            <div className="flex items-center justify-between bg-[var(--bg-card)] border border-[var(--border-subtle)] px-4 py-2.5 rounded-xl shadow-xs shrink-0">
               <div className="flex items-center gap-2 font-mono text-xs text-[var(--text-secondary)]">
                 <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
                 <span className="font-semibold text-[var(--text-primary)]">Live Frontend Preview</span>
@@ -740,10 +740,10 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
             </div>
 
             {/* LIVE PREVIEW CONTAINER */}
-            <div className="p-4 sm:p-8 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl min-h-[580px] lg:h-[calc(100vh-140px)] lg:min-h-[720px] overflow-y-auto shadow-inner">
+            <div className="flex-1 flex flex-col p-4 sm:p-8 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl min-h-[580px] lg:min-h-[720px] shadow-inner">
               {previewStyle === "detail" ? (
                 /* Detail Page Mockup */
-                <div className="space-y-6 w-full max-w-3xl mx-auto">
+                <div className="space-y-6 w-full max-w-3xl mx-auto flex-1 flex flex-col">
                   <div className="font-mono text-xs text-[var(--accent)]">
                     &larr; {activeLang === "es" ? "Volver a Proyectos" : "Back to Projects"}
                   </div>
@@ -810,14 +810,14 @@ export default function ProjectEditor({ initialData, mode, onSubmit }: ProjectEd
                   </Card>
 
                   {/* Documentation Markdown Card */}
-                  <Card>
+                  <Card className="flex-1 flex flex-col min-h-[420px]">
                     <div className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2 mb-4">
                       {activeLang === "es" ? "Documentación del Proyecto" : "Project Documentation"}
                     </div>
                     {previewContent ? (
                       <Markdown content={previewContent} />
                     ) : (
-                      <div className="border border-dashed border-[var(--border-subtle)] p-8 text-center bg-[var(--bg-secondary)] font-mono text-xs text-[var(--text-muted)] rounded-xl">
+                      <div className="border border-dashed border-[var(--border-subtle)] p-8 text-center bg-[var(--bg-secondary)] font-mono text-xs text-[var(--text-muted)] rounded-xl flex-1 min-h-[300px] flex items-center justify-center">
                         {activeLang === "es"
                           ? "Escribe Markdown en el editor de la izquierda para ver el resultado renderizado en vivo."
                           : "Type Markdown in the editor on the left to see live rendered documentation here."}
