@@ -23,15 +23,7 @@ export default async function EditProjectPage({ params }: PageProps) {
   }
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto">
-      <section className="accent-bar pl-6 space-y-2">
-        <span className="font-mono text-xs font-bold text-rust tracking-wider uppercase">
-          Edit Mode
-        </span>
-        <h1 className="text-3xl font-display font-normal tracking-tight">
-          {project.title}
-        </h1>
-      </section>
+    <div className="space-y-6 max-w-6xl mx-auto">
       <EditProjectFormClient project={project} />
     </div>
   );
