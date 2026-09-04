@@ -1,5 +1,5 @@
 import { redirect, notFound } from "next/navigation";
-import { verifySession, getPostById } from "../../actions";
+import { verifySession, getPostById, getProjects } from "../../actions";
 import EditBlogFormClient from "./EditBlogFormClient";
 
 interface PageProps {
@@ -22,6 +22,8 @@ export default async function EditBlogPage({ params }: PageProps) {
     notFound();
   }
 
+  const projects = await getProjects();
+
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
       <section className="accent-bar pl-6 space-y-2">
@@ -32,7 +34,7 @@ export default async function EditBlogPage({ params }: PageProps) {
           {post.title}
         </h1>
       </section>
-      <EditBlogFormClient post={post} />
+      <EditBlogFormClient post={post} projects={projects} />
     </div>
   );
 }

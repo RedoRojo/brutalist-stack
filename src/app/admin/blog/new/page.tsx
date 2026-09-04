@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { verifySession } from "../../actions";
+import { verifySession, getProjects } from "../../actions";
 import BlogFormClient from "./BlogFormClient";
 
 export const revalidate = 0;
@@ -11,6 +11,8 @@ export default async function NewBlogPage() {
     redirect("/admin/login");
   }
 
+  const projects = await getProjects();
+
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
       <section className="accent-bar pl-6 space-y-2">
@@ -21,7 +23,7 @@ export default async function NewBlogPage() {
           Create New Blog Post
         </h1>
       </section>
-      <BlogFormClient />
+      <BlogFormClient projects={projects} />
     </div>
   );
 }

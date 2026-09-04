@@ -8,24 +8,43 @@ import { updatePost } from "../../actions";
 interface Post {
   id: string;
   title: string;
+  titleEs?: string | null;
   slug: string;
   summary: string;
+  summaryEs?: string | null;
   content: string;
+  contentEs?: string | null;
+  tags?: string | null;
+  published?: boolean;
+  projectId?: string | null;
+}
+
+interface ProjectOption {
+  id: string;
+  title: string;
+  [key: string]: unknown;
 }
 
 interface EditBlogFormClientProps {
   post: Post;
+  projects?: ProjectOption[];
 }
 
-export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
+export default function EditBlogFormClient({ post, projects = [] }: EditBlogFormClientProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [title, setTitle] = useState(post.title);
+  const [titleEs, setTitleEs] = useState(post.titleEs || "");
   const [slug, setSlug] = useState(post.slug);
   const [summary, setSummary] = useState(post.summary);
+  const [summaryEs, setSummaryEs] = useState(post.summaryEs || "");
   const [content, setContent] = useState(post.content);
+  const [contentEs, setContentEs] = useState(post.contentEs || "");
+  const [tags, setTags] = useState(post.tags || "");
+  const [projectId, setProjectId] = useState(post.projectId || "");
+  const [published, setPublished] = useState(post.published ?? true);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -34,9 +53,15 @@ export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
 
     const payload = {
       title,
+      titleEs,
       slug,
       summary,
+      summaryEs,
       content,
+      contentEs,
+      tags: tags || undefined,
+      projectId: projectId || null,
+      published,
     };
 
     try {
@@ -81,7 +106,7 @@ export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
             htmlFor="b-title"
             className="font-bold uppercase tracking-wider block text-bone/60"
           >
-            Post Title
+            Post Title (EN)
           </label>
           <input
             id="b-title"
@@ -90,6 +115,24 @@ export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             disabled={loading}
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="b-title-es"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Post Title (ES - Optional)
+          </label>
+          <input
+            id="b-title-es"
+            type="text"
+            value={titleEs}
+            onChange={(e) => setTitleEs(e.target.value)}
+            disabled={loading}
+            placeholder="ej. Título del artículo en español"
             className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
           />
         </div>
@@ -117,7 +160,7 @@ export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
             htmlFor="b-summary"
             className="font-bold uppercase tracking-wider block text-bone/60"
           >
-            Summary
+            Summary (EN)
           </label>
           <textarea
             id="b-summary"
@@ -132,20 +175,114 @@ export default function EditBlogFormClient({ post }: EditBlogFormClientProps) {
 
         <div className="space-y-1">
           <label
+            htmlFor="b-summary-es"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Summary (ES - Optional)
+          </label>
+          <textarea
+            id="b-summary-es"
+            rows={2}
+            value={summaryEs}
+            onChange={(e) => setSummaryEs(e.target.value)}
+            disabled={loading}
+            placeholder="Resumen del artículo en español"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
             htmlFor="b-content"
             className="font-bold uppercase tracking-wider block text-bone/60"
           >
-            Post Body (Markdown)
+            Post Body (EN - Markdown)
           </label>
           <textarea
             id="b-content"
             required
-            rows={14}
+            rows={10}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             disabled={loading}
             className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-xs font-mono text-bone"
           />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="b-content-es"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Post Body (ES - Markdown - Optional)
+          </label>
+          <textarea
+            id="b-content-es"
+            rows={10}
+            value={contentEs}
+            onChange={(e) => setContentEs(e.target.value)}
+            disabled={loading}
+            placeholder="# Contenido en español..."
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-xs font-mono text-bone"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="b-project"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Associated Project (Optional)
+          </label>
+          <select
+            id="b-project"
+            value={projectId}
+            onChange={(e) => setProjectId(e.target.value)}
+            disabled={loading}
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          >
+            <option value="">-- Standalone Post (No Project) --</option>
+            {projects.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.title}
+              </option>
+            ))}
+          </select>
+          <p className="text-[11px] font-sans text-ash/70">
+            Link this article as a devlog, architecture breakdown, or update for a registered project.
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="b-tags"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Tags (Comma-separated - Optional)
+          </label>
+          <input
+            id="b-tags"
+            type="text"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
+            disabled={loading}
+            placeholder="e.g. TypeScript, Performance, Architecture"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          />
+        </div>
+
+        <div className="flex items-center gap-2 pt-2 pb-1">
+          <input
+            id="b-published"
+            type="checkbox"
+            checked={published}
+            onChange={(e) => setPublished(e.target.checked)}
+            disabled={loading}
+            className="h-4 w-4 rounded-none border-ash/40 text-rust focus:ring-0"
+          />
+          <label htmlFor="b-published" className="font-bold uppercase tracking-wider text-bone/80 text-xs">
+            Published (Uncheck to save as draft)
+          </label>
         </div>
 
         <button

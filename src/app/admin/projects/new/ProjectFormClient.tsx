@@ -11,11 +11,26 @@ export default function ProjectFormClient() {
   const [error, setError] = useState<string | null>(null);
 
   const [title, setTitle] = useState("");
+  const [titleEs, setTitleEs] = useState("");
+  const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
+  const [descriptionEs, setDescriptionEs] = useState("");
   const [content, setContent] = useState("");
+  const [contentEs, setContentEs] = useState("");
   const [techStack, setTechStack] = useState("");
   const [repoUrl, setRepoUrl] = useState("");
   const [liveUrl, setLiveUrl] = useState("");
+  const [status, setStatus] = useState("COMPLETED");
+  const [featured, setFeatured] = useState(false);
+
+  function handleTitleChange(val: string) {
+    setTitle(val);
+    const generatedSlug = val
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-_]/g, "")
+      .replace(/\s+/g, "-");
+    setSlug(generatedSlug);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,11 +39,17 @@ export default function ProjectFormClient() {
 
     const payload = {
       title,
+      titleEs,
+      slug,
       description,
+      descriptionEs,
       content,
+      contentEs,
       techStack,
-      repoUrl,
-      liveUrl,
+      repoUrl: repoUrl || undefined,
+      liveUrl: liveUrl || undefined,
+      status,
+      featured,
     };
 
     try {
@@ -73,16 +94,53 @@ export default function ProjectFormClient() {
             htmlFor="p-title"
             className="font-bold uppercase tracking-wider block text-bone/60"
           >
-            Project Title
+            Project Title (EN)
           </label>
           <input
             id="p-title"
             type="text"
             required
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => handleTitleChange(e.target.value)}
             disabled={loading}
             placeholder="e.g. Real-Time Signal Classifier"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="p-title-es"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Project Title (ES - Optional)
+          </label>
+          <input
+            id="p-title-es"
+            type="text"
+            value={titleEs}
+            onChange={(e) => setTitleEs(e.target.value)}
+            disabled={loading}
+            placeholder="ej. Clasificador de Señales en Tiempo Real"
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="p-slug"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Slug (URL path)
+          </label>
+          <input
+            id="p-slug"
+            type="text"
+            required
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
+            disabled={loading}
+            placeholder="real-time-signal-classifier"
             className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
           />
         </div>
@@ -92,7 +150,7 @@ export default function ProjectFormClient() {
             htmlFor="p-desc"
             className="font-bold uppercase tracking-wider block text-bone/60"
           >
-            Short Description
+            Short Description (EN)
           </label>
           <textarea
             id="p-desc"
@@ -108,21 +166,57 @@ export default function ProjectFormClient() {
 
         <div className="space-y-1">
           <label
+            htmlFor="p-desc-es"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Short Description (ES - Optional)
+          </label>
+          <textarea
+            id="p-desc-es"
+            rows={2}
+            value={descriptionEs}
+            onChange={(e) => setDescriptionEs(e.target.value)}
+            disabled={loading}
+            placeholder="Resumen corto del proyecto para tarjetas."
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
             htmlFor="p-content"
             className="font-bold uppercase tracking-wider block text-bone/60"
           >
-            Detailed Content (Markdown)
+            Detailed Content (EN - Markdown)
           </label>
           <span className="text-[10px] text-ash block mb-1">
             Supports `![alt](/path/to/img)` for images
           </span>
           <textarea
             id="p-content"
-            rows={12}
+            rows={8}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             disabled={loading}
             placeholder="# Technical Architecture...&#10;&#10;Describe system pipelines here."
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-xs font-mono text-bone"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="p-content-es"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Detailed Content (ES - Markdown - Optional)
+          </label>
+          <textarea
+            id="p-content-es"
+            rows={8}
+            value={contentEs}
+            onChange={(e) => setContentEs(e.target.value)}
+            disabled={loading}
+            placeholder="# Arquitectura Técnica...&#10;&#10;Describe el sistema aquí."
             className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-xs font-mono text-bone"
           />
         </div>
@@ -179,6 +273,40 @@ export default function ProjectFormClient() {
             placeholder="https://project.live"
             className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
           />
+        </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="p-status"
+            className="font-bold uppercase tracking-wider block text-bone/60"
+          >
+            Project Status
+          </label>
+          <select
+            id="p-status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            disabled={loading}
+            className="w-full px-3 py-2 border border-ash/40 bg-void rounded-none focus:outline-none focus:border-rust text-sm text-bone font-sans"
+          >
+            <option value="COMPLETED">Completed</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="ARCHIVED">Archived</option>
+          </select>
+        </div>
+
+        <div className="flex items-center gap-2 pt-2 pb-1">
+          <input
+            id="p-featured"
+            type="checkbox"
+            checked={featured}
+            onChange={(e) => setFeatured(e.target.checked)}
+            disabled={loading}
+            className="h-4 w-4 rounded-none border-ash/40 text-rust focus:ring-0"
+          />
+          <label htmlFor="p-featured" className="font-bold uppercase tracking-wider text-bone/80 text-xs">
+            Mark as Featured (display in hero/featured sections)
+          </label>
         </div>
 
         <button

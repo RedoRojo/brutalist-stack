@@ -9,24 +9,43 @@ import Card from "@/components/Card";
 interface Project {
   id: string;
   title: string;
+  titleEs?: string | null;
+  slug?: string;
   description: string;
-  content: string;
-  techStack: string;
-  repoUrl: string;
-  liveUrl: string;
+  descriptionEs?: string | null;
+  content?: string;
+  contentEs?: string | null;
+  techStack?: string | null;
+  repoUrl?: string | null;
+  liveUrl?: string | null;
+  featured?: boolean;
+  status?: string;
   createdAt: Date;
   updatedAt: Date;
+  _count?: { posts: number };
 }
 
 interface Post {
   id: string;
   title: string;
+  titleEs?: string | null;
   slug: string;
   summary: string;
-  content: string;
+  summaryEs?: string | null;
+  content?: string;
+  contentEs?: string | null;
+  tags?: string | null;
+  published?: boolean;
   publishedAt: Date;
   createdAt: Date;
   updatedAt: Date;
+  projectId?: string | null;
+  project?: {
+    id: string;
+    title: string;
+    titleEs?: string | null;
+    slug: string;
+  } | null;
 }
 
 interface AdminDashboardClientProps {
@@ -53,9 +72,9 @@ export default function AdminDashboardClient({
     new Set(
       initialProjects
         .flatMap((p) =>
-          p.techStack ? p.techStack.split(",").map((t) => t.trim()) : []
+          p.techStack ? p.techStack.split(",").map((t: string) => t.trim()) : []
         )
-        .filter((t) => t.length > 0)
+        .filter((t: string) => t.length > 0)
     )
   );
 
@@ -269,8 +288,11 @@ export default function AdminDashboardClient({
                       <th className="pb-2 font-bold uppercase tracking-wider text-bone/60">
                         Title
                       </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider hidden lg:table-cell text-bone/60">
+                        Devlogs / Posts
+                      </th>
                       <th className="pb-2 font-bold uppercase tracking-wider hidden md:table-cell text-bone/60">
-                        Tech Stack
+                        Status
                       </th>
                       <th className="pb-2 font-bold uppercase tracking-wider hidden sm:table-cell text-bone/60">
                         Last Updated
@@ -287,10 +309,27 @@ export default function AdminDashboardClient({
                         className="hover:bg-bone/5 transition-colors"
                       >
                         <td className="py-3 pr-2 font-sans text-sm text-bone">
-                          {project.title}
+                          <div className="flex items-center gap-2">
+                            <span>{project.title}</span>
+                            {project.featured && (
+                              <span className="text-[10px] text-rust font-mono border border-rust/40 px-1 py-0.2 rounded">
+                                ★ Featured
+                              </span>
+                            )}
+                          </div>
+                          <span className="font-mono text-[11px] text-ash block">
+                            /{project.slug || project.id}
+                          </span>
                         </td>
-                        <td className="py-3 pr-2 hidden md:table-cell max-w-xs truncate text-bone/50">
-                          {project.techStack || "-"}
+                        <td className="py-3 pr-2 hidden lg:table-cell text-bone/70">
+                          <span className="px-2 py-0.5 bg-void border border-ash/20 rounded text-[11px]">
+                            {project._count?.posts ?? 0} {project._count?.posts === 1 ? "post" : "posts"}
+                          </span>
+                        </td>
+                        <td className="py-3 pr-2 hidden md:table-cell text-bone/60">
+                          <span className="text-[11px] uppercase">
+                            {project.status || "COMPLETED"}
+                          </span>
                         </td>
                         <td className="py-3 pr-2 hidden sm:table-cell text-bone/50">
                           {new Date(project.updatedAt).toLocaleDateString()}
@@ -348,8 +387,11 @@ export default function AdminDashboardClient({
                       <th className="pb-2 font-bold uppercase tracking-wider text-bone/60">
                         Title
                       </th>
+                      <th className="pb-2 font-bold uppercase tracking-wider hidden lg:table-cell text-bone/60">
+                        Associated Project
+                      </th>
                       <th className="pb-2 font-bold uppercase tracking-wider hidden md:table-cell text-bone/60">
-                        Slug
+                        Status
                       </th>
                       <th className="pb-2 font-bold uppercase tracking-wider hidden sm:table-cell text-bone/60">
                         Published Date
@@ -366,10 +408,24 @@ export default function AdminDashboardClient({
                         className="hover:bg-bone/5 transition-colors"
                       >
                         <td className="py-3 pr-2 font-sans text-sm text-bone">
-                          {post.title}
+                          <div>{post.title}</div>
+                          <span className="font-mono text-[11px] text-ash block">
+                            /{post.slug}
+                          </span>
                         </td>
-                        <td className="py-3 pr-2 hidden md:table-cell text-bone/50">
-                          {post.slug}
+                        <td className="py-3 pr-2 hidden lg:table-cell text-bone/70">
+                          {post.project ? (
+                            <span className="px-2 py-0.5 bg-rust/10 text-rust border border-rust/30 rounded text-[11px]">
+                              📌 {post.project.title}
+                            </span>
+                          ) : (
+                            <span className="text-ash text-[11px]">Standalone</span>
+                          )}
+                        </td>
+                        <td className="py-3 pr-2 hidden md:table-cell text-bone/60">
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded ${post.published ? "bg-bone/10 text-bone" : "bg-ash/20 text-ash"}`}>
+                            {post.published ? "Published" : "Draft"}
+                          </span>
                         </td>
                         <td className="py-3 pr-2 hidden sm:table-cell text-bone/50">
                           {new Date(post.publishedAt).toLocaleDateString()}

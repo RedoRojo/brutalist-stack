@@ -10,24 +10,43 @@ datasource db {
 }
 
 model Project {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  content     String   @default("")
-  techStack   String
-  repoUrl     String
-  liveUrl     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(uuid())
+  title         String
+  titleEs       String?
+  slug          String   @unique
+  description   String
+  descriptionEs String?
+  content       String   @default("")
+  contentEs     String?  @default("")
+  techStack     String
+  repoUrl       String?
+  liveUrl       String?
+  featured      Boolean  @default(false)
+  status        String   @default("COMPLETED")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  posts         Post[]
 }
 
 model Post {
   id          String   @id @default(uuid())
   title       String
+  titleEs     String?
   slug        String   @unique
   summary     String
+  summaryEs   String?
   content     String
+  contentEs   String?  @default("")
+  tags        String?
+  published   Boolean  @default(true)
   publishedAt DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  @@index([projectId])
 }
+
