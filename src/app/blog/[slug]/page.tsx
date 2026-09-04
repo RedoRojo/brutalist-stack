@@ -1,9 +1,6 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getPostBySlug } from "../../admin/actions";
-import Markdown from "@/components/Markdown";
-import Card from "@/components/Card";
-import Badge from "@/components/Badge";
+import BlogDetailContent from "@/components/BlogDetailContent";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -19,42 +16,5 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  return (
-    <div className="space-y-8 max-w-3xl mx-auto">
-      {/* Back link */}
-      <div className="font-mono text-xs">
-        <Link href="/blog" className="text-[var(--accent)] link-underline">
-          &larr; Back to Blog
-        </Link>
-      </div>
-
-      {/* Post Header */}
-      <Card accent>
-        <div className="space-y-4">
-          <Badge variant="red">
-            PUBLISHED{" "}
-            {new Date(post.publishedAt).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </Badge>
-          <h1 className="text-2xl sm:text-3xl font-display font-normal tracking-tight leading-snug text-[var(--text-primary)]">
-            {post.title}
-          </h1>
-          <p className="text-sm font-sans text-[var(--text-secondary)] border-l-2 border-[var(--accent)] pl-4 leading-relaxed italic">
-            {post.summary}
-          </p>
-        </div>
-      </Card>
-
-      {/* Post Content */}
-      <Card>
-        <div className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2 mb-4">
-          Journal Entry
-        </div>
-        <Markdown content={post.content} />
-      </Card>
-    </div>
-  );
+  return <BlogDetailContent post={post} />;
 }
